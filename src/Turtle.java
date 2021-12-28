@@ -115,7 +115,8 @@ public class Turtle {
 	}
 
 	public void replay(int startNumber, int endNumber) {
-
+		
+		arrayLog.add("replay()"+ startNumber + endNumber);
 		if (endNumber <= this.arrayLog.size()) {
 			for (int i = startNumber; i <= endNumber; i++) {
 				String arrayElement = this.arrayLog.get(i);
@@ -129,26 +130,30 @@ public class Turtle {
 		String[] parts = string.split("[()]");
 		String methodName = parts[0].concat("()");
 		String attributeValue = parts[2];
-		arrayLog.add(methodName + attributeValue);
+		
 
 		int attribute = Integer.parseInt(attributeValue);
 		switch (methodName) {
-		case "moveForward":
+		case "moveForward()":
 			this.moveForward(attribute);
 			break;
-		case "moveBackward":
+		case "moveBackward()":
 			this.moveBackward(attribute);
 			break;
-		case "moveLeft":
+		case "moveLeft()":
 			this.moveLeft(attribute);
 			break;
-		case "moveRight":
-			this.moveBackward(attribute);
+		case "moveRight()":
+			this.moveRight(attribute);
 			break;
-		case "setAngle":
+		case "setAngle()":
 			this.setAngle(attribute);
 			break;
-		case "goToPosition":
+			
+		case "replay()":
+			this.replay(attribute, attribute);
+			break;
+		case "goToPosition()":
 			
 			this.goToPosition(attribute, attribute);
 			
