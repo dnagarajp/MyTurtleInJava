@@ -1,14 +1,23 @@
+import java.util.ArrayList;
 
 public class Turtle {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 	}
 
 	public int x;
 	public int y;
 	public int angle;
+	public ArrayList<String> arrayLog;
+
+	public Turtle() {
+		this.x = 0;
+		this.y = 0;
+		this.angle = 0;
+		arrayLog = new ArrayList<String>();
+
+	}
 
 	public void moveSouth(int steps) {
 
@@ -28,11 +37,14 @@ public class Turtle {
 	}
 
 	public void moveWest(int steps) {
+
 		x = x - steps;
 
 	}
 
 	public void setAngle(int angleValue) {
+
+		arrayLog.add("setAngle()" + angleValue);
 
 		angle = angleValue;
 
@@ -40,9 +52,10 @@ public class Turtle {
 
 	public void moveForward(int steps) {
 		// only expects 0,90,180 and 270
+		arrayLog.add("moveForward()" + steps);
 		if (angle == 0) {
 			this.moveEast(steps);
-		} else if (angle == 90) {
+		} else if (angle <= 90 && angle > 0) {
 			this.moveNorth(steps);
 		} else if (angle == 180) {
 			this.moveWest(steps);
@@ -53,6 +66,7 @@ public class Turtle {
 
 	public void moveBackward(int steps) {
 		// only expects 0,90,180 and 270
+		arrayLog.add("moveBackward()" + steps);
 		if (angle == 0) {
 			this.moveWest(steps);
 		} else if (angle == 90) {
@@ -66,6 +80,7 @@ public class Turtle {
 
 	public void moveLeft(int steps) {
 		// only expects 0,90,180 and 270
+		arrayLog.add("moveLeft()" + steps);
 		if (angle == 0) {
 			this.moveNorth(steps);
 		} else if (angle == 90) {
@@ -79,6 +94,7 @@ public class Turtle {
 
 	public void moveRight(int steps) {
 		// only expects 0,90,180 and 270
+		arrayLog.add("moveRight()" + steps);
 		if (angle == 0) {
 			this.moveSouth(steps);
 		} else if (angle == 90) {
@@ -91,8 +107,37 @@ public class Turtle {
 	}
 
 	public void goToPosition(int xValue, int yValue) {
-		x= xValue;
-		y= yValue;
+
+		arrayLog.add("goToPosition()" + xValue + yValue);
+		x = xValue;
+		y = yValue;
 	}
 
+	public Object getHistory() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void replay(int startNumber, int endNumber) {
+		
+		//arrayLog.add("replay()"+ startNumber + endNumber);
+		if(endNumber<=this.arrayLog.size())
+		{
+	       for(int i=startNumber ; i<=endNumber ; i++)
+		   {
+			  String arrayElement = this.arrayLog.get(i);
+			  this.executeArrayLogElement(arrayElement);
+		   }
+		}
+	}
+
+	public void executeArrayLogElement(String element) {
+		String elementMethodName = element.split(())t;
+		String argumentName;
+		if(storeElement.contains(element))
+		{
+			
+		}
+		
+	}
 }

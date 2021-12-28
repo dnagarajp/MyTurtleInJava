@@ -70,10 +70,12 @@ class TestTurtle {
 	
 	@Test
 	void testMoveForward() {
-		turtle.setAngle(180);
+		turtle.setAngle(45);
 		turtle.moveForward(5);
-        assertEquals(-5,turtle.x);
-        assertEquals(0,turtle.y);	
+        assertEquals(0,turtle.x);
+        assertEquals(5,turtle.y);	
+        
+        
 	}
 	
 	@Test
@@ -98,6 +100,29 @@ class TestTurtle {
 		turtle.moveRight(5);
         assertEquals(-5,turtle.x);
         assertEquals(0,turtle.y);	
+	}
+	
+	@Test
+	void testLog() {
+		turtle.setAngle(270);
+		turtle.moveRight(5);
+        assertEquals(2, turtle.arrayLog.size());
+        assertEquals("setAngle()270", turtle.arrayLog.get(0));
+        assertEquals("moveRight()5", turtle.arrayLog.get(1));
+	
+	}
+	
+	@Test
+	void testReplay() {
+
+        turtle.goToPosition(3, 8);
+        turtle.moveForward(10);
+        turtle.setAngle(90);
+        turtle.replay(2, 3);
+
+        assertEquals(13,turtle.x);
+        assertEquals(18,turtle.y);
+        assertEquals(90, turtle.angle);
 	}
 	
 }
