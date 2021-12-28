@@ -12,10 +12,10 @@ public class Turtle {
 	public int angle;
 	public ArrayList<String> arrayLog;
 
-	public Turtle() {
-		this.x = 0;
-		this.y = 0;
-		this.angle = 0;
+	public Turtle(int x, int y, int angle) {
+		this.x = x;
+		this.y = y;
+		this.angle = angle;
 		arrayLog = new ArrayList<String>();
 
 	}
@@ -56,7 +56,7 @@ public class Turtle {
 		arrayLog.add("moveForward()" + steps);
 		if (angle == 0) {
 			this.moveEast(steps);
-		} else if (angle <= 90 ) {
+		} else if (angle <= 90) {
 			this.moveNorth(steps);
 		} else if (angle == 180) {
 			this.moveWest(steps);
@@ -114,14 +114,8 @@ public class Turtle {
 		y = yValue;
 	}
 
-	public Object getHistory() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public void replay(int startNumber, int endNumber) {
 
-		// arrayLog.add("replay()"+ startNumber + endNumber);
 		if (endNumber <= this.arrayLog.size()) {
 			for (int i = startNumber; i <= endNumber; i++) {
 				String arrayElement = this.arrayLog.get(i);
@@ -135,23 +129,39 @@ public class Turtle {
 		String[] parts = string.split("[()]");
 		String methodName = parts[0].concat("()");
 		String attributeValue = parts[2];
+		arrayLog.add(methodName + attributeValue);
+
 		int attribute = Integer.parseInt(attributeValue);
-//		switch(methodName == "moveForward()"){
-//		case "moveForward()":
-//			this.moveForward(attribute);}
-		
-		switch(methodName) {
-		  case :
-		    // code block
-		    break;
-		  case y:
-		    // code block
-		    break;
-		  default:
-		    // code block
-		}
+		switch (methodName) {
+		case "moveForward":
+			this.moveForward(attribute);
+			break;
+		case "moveBackward":
+			this.moveBackward(attribute);
+			break;
+		case "moveLeft":
+			this.moveLeft(attribute);
+			break;
+		case "moveRight":
+			this.moveBackward(attribute);
+			break;
+		case "setAngle":
+			this.setAngle(attribute);
+			break;
+		case "goToPosition":
 			
-		
+			this.goToPosition(attribute, attribute);
+			
+		default:
+			System.out.println("Invalid method name");
+		}
+
+	}
+
+	public void list() {
+		for (int i = 0; i <= this.arrayLog.size(); i++) {
+			System.out.println(this.arrayLog.get(i));
+		}
 
 	}
 }

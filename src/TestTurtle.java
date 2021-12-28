@@ -8,7 +8,7 @@ class TestTurtle {
 	Turtle turtle;
 	@BeforeEach
 	void setUp() throws Exception {
-		turtle = new Turtle();
+		turtle = new Turtle(0,0,0);
 		
 	}
 	
@@ -118,11 +118,38 @@ class TestTurtle {
         turtle.goToPosition(3, 8);
         turtle.moveForward(10);
         turtle.setAngle(90);
-        turtle.replay(1, 2);
-
+        turtle.replay(1,2);
         assertEquals(13,turtle.x);
-        assertEquals(18,turtle.y);
+        assertEquals(8,turtle.y);
         assertEquals(90, turtle.angle);
+        assertEquals(5,turtle.arrayLog.size());
 	}
 	
+	@Test
+	void testReplayTwice() {
+
+        turtle.goToPosition(3,8);
+        turtle.moveForward(10);
+        turtle.setAngle(90);
+        turtle.replay(1,2);
+        turtle.replay(0,1);
+        assertEquals(13,turtle.x);
+        assertEquals(8,turtle.y);
+        assertEquals(90, turtle.angle);
+        assertEquals(7,turtle.arrayLog.size());
+	}
+	
+	
+	
+	@Test
+	void testListisEmpty() {
+        assertEquals(0, turtle.arrayLog.size());
+	}
+	
+	@Test
+	void testList() {
+		turtle.goToPosition(3, 8);
+        assertEquals(1, turtle.arrayLog.size());
+	}
+
 }
