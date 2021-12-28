@@ -118,7 +118,7 @@ class TestTurtle {
         turtle.goToPosition(3, 8);
         turtle.moveForward(10);
         turtle.setAngle(90);
-        turtle.replay(2, 3);
+        turtle.replay(1, 2);
 
         assertEquals(13,turtle.x);
         assertEquals(18,turtle.y);

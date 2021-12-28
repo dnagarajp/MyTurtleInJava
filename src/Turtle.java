@@ -1,3 +1,4 @@
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class Turtle {
@@ -55,7 +56,7 @@ public class Turtle {
 		arrayLog.add("moveForward()" + steps);
 		if (angle == 0) {
 			this.moveEast(steps);
-		} else if (angle <= 90 && angle > 0) {
+		} else if (angle <= 90 ) {
 			this.moveNorth(steps);
 		} else if (angle == 180) {
 			this.moveWest(steps);
@@ -119,25 +120,38 @@ public class Turtle {
 	}
 
 	public void replay(int startNumber, int endNumber) {
-		
-		//arrayLog.add("replay()"+ startNumber + endNumber);
-		if(endNumber<=this.arrayLog.size())
-		{
-	       for(int i=startNumber ; i<=endNumber ; i++)
-		   {
-			  String arrayElement = this.arrayLog.get(i);
-			  this.executeArrayLogElement(arrayElement);
-		   }
+
+		// arrayLog.add("replay()"+ startNumber + endNumber);
+		if (endNumber <= this.arrayLog.size()) {
+			for (int i = startNumber; i <= endNumber; i++) {
+				String arrayElement = this.arrayLog.get(i);
+				this.executeArrayLogElement(arrayElement);
+			}
 		}
 	}
 
 	public void executeArrayLogElement(String element) {
-		String elementMethodName = element.split(())t;
-		String argumentName;
-		if(storeElement.contains(element))
-		{
-			
-		}
+		String string = element;
+		String[] parts = string.split("[()]");
+		String methodName = parts[0].concat("()");
+		String attributeValue = parts[2];
+		int attribute = Integer.parseInt(attributeValue);
+//		switch(methodName == "moveForward()"){
+//		case "moveForward()":
+//			this.moveForward(attribute);}
 		
+		switch(methodName) {
+		  case :
+		    // code block
+		    break;
+		  case y:
+		    // code block
+		    break;
+		  default:
+		    // code block
+		}
+			
+		
+
 	}
 }
