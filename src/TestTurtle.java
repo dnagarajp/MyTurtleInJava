@@ -106,8 +106,8 @@ class TestTurtle {
 		turtle.setAngle(270);
 		turtle.moveRight(5);
 		assertEquals(2, turtle.arrayLog.size());
-		assertEquals("setAngle()270", turtle.arrayLog.get(0));
-		assertEquals("moveRight()5", turtle.arrayLog.get(1));
+		assertEquals("setAngle() 270", turtle.arrayLog.get(0));
+		assertEquals("moveRight() 5", turtle.arrayLog.get(1));
 
 	}
 
@@ -131,13 +131,12 @@ class TestTurtle {
 		turtle.goToPosition(0, 0);
 		turtle.setAngle(90);
 		turtle.moveForward(10);
-		turtle.replay(1, 2); // totally the size is 3 together commands here. 1 is reply and 1st - setangle,
-								// 2nd forward()
-		turtle.replay(2, 3); // 
+		turtle.replay(1, 2); // totally the size is 3 together commands here. 
+		turtle.replay(0, 3); // this contains 7 commands in total
 		assertEquals(0, turtle.x);
-		assertEquals(40, turtle.y);
+		assertEquals(20, turtle.y);
 		assertEquals(90, turtle.angle);
-		assertEquals(9, turtle.arrayLog.size());
+		assertEquals(13, turtle.arrayLog.size());
 	}
 
 	@Test

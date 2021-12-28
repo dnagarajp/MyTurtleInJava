@@ -45,7 +45,7 @@ public class Turtle {
 
 	public void setAngle(int angleValue) {
 
-		arrayLog.add("setAngle()" + angleValue);
+		arrayLog.add("setAngle()" + " " + angleValue);
 
 		angle = angleValue;
 
@@ -53,7 +53,7 @@ public class Turtle {
 
 	public void moveForward(int steps) {
 		// only expects 0,90,180 and 270
-		arrayLog.add("moveForward()" + steps);
+		arrayLog.add("moveForward()" + " " + steps);
 		if (angle == 0) {
 			this.moveEast(steps);
 		} else if (angle <= 90) {
@@ -67,7 +67,7 @@ public class Turtle {
 
 	public void moveBackward(int steps) {
 		// only expects 0,90,180 and 270
-		arrayLog.add("moveBackward()" + steps);
+		arrayLog.add("moveBackward()" + " " + steps);
 		if (angle == 0) {
 			this.moveWest(steps);
 		} else if (angle == 90) {
@@ -81,7 +81,7 @@ public class Turtle {
 
 	public void moveLeft(int steps) {
 		// only expects 0,90,180 and 270
-		arrayLog.add("moveLeft()" + steps);
+		arrayLog.add("moveLeft()" + " " + steps);
 		if (angle == 0) {
 			this.moveNorth(steps);
 		} else if (angle == 90) {
@@ -95,7 +95,7 @@ public class Turtle {
 
 	public void moveRight(int steps) {
 		// only expects 0,90,180 and 270
-		arrayLog.add("moveRight()" + steps);
+		arrayLog.add("moveRight()" + " " + steps);
 		if (angle == 0) {
 			this.moveSouth(steps);
 		} else if (angle == 90) {
@@ -109,58 +109,57 @@ public class Turtle {
 
 	public void goToPosition(int xValue, int yValue) {
 
-		arrayLog.add("goToPosition()" + xValue + yValue);
+		arrayLog.add("goToPosition()" + " " + xValue + " " + yValue);
 		x = xValue;
 		y = yValue;
 	}
 
 	public void replay(int startNumber, int endNumber) {
-		
-		arrayLog.add("replay()"+ startNumber + endNumber);
+
+		arrayLog.add("replay()" + " " + startNumber + " " + endNumber);
 		if (endNumber <= this.arrayLog.size()) {
 			for (int i = startNumber; i <= endNumber; i++) {
-				String arrayElement = this.arrayLog.get(i);
-				this.executeArrayLogElement(arrayElement);
+				String string = this.arrayLog.get(i);
+				String[] parts = string.split(" ");
+				String methodName = parts[0];
+				String attributeValue = parts[1];
+				int attribute = Integer.parseInt(attributeValue);
+
+				switch (methodName) {
+				case "moveForward()":
+					this.moveForward(attribute);
+					break;
+				case "moveBackward()":
+					this.moveBackward(attribute);
+					break;
+				case "moveLeft()":
+					this.moveLeft(attribute);
+					break;
+				case "moveRight()":
+					this.moveRight(attribute);
+					break;
+				case "setAngle()":
+					this.setAngle(attribute);
+					break;
+
+				case "replay()":
+
+					String attributeValue2 = parts[2];
+					int attribute2 = Integer.parseInt(attributeValue2);
+					this.replay(attribute, attribute2);
+					break;
+
+				case "goToPosition()":
+
+					String getPosition2 = parts[2];
+					int position2 = Integer.parseInt(getPosition2);
+					this.goToPosition(attribute, position2);
+
+				default:
+					System.out.println("Invalid method name");
+				}
 			}
 		}
-	}
-
-	public void executeArrayLogElement(String element) {
-		String string = element;
-		String[] parts = string.split("[()]");
-		String methodName = parts[0].concat("()");
-		String attributeValue = parts[2];
-		
-
-		int attribute = Integer.parseInt(attributeValue);
-		switch (methodName) {
-		case "moveForward()":
-			this.moveForward(attribute);
-			break;
-		case "moveBackward()":
-			this.moveBackward(attribute);
-			break;
-		case "moveLeft()":
-			this.moveLeft(attribute);
-			break;
-		case "moveRight()":
-			this.moveRight(attribute);
-			break;
-		case "setAngle()":
-			this.setAngle(attribute);
-			break;
-			
-		case "replay()":
-			this.replay(attribute, attribute);
-			break;
-		case "goToPosition()":
-			
-			this.goToPosition(attribute, attribute);
-			
-		default:
-			System.out.println("Invalid method name");
-		}
-
 	}
 
 	public void list() {
