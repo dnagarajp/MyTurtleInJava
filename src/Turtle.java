@@ -162,10 +162,67 @@ public class Turtle {
 		}
 	}
 
-	public void list() {
-		for (int i = 0; i <= this.arrayLog.size(); i++) {
+	public void getList() {
+		System.out.println("Array Size is :=  " + this.arrayLog.size() + "\n" + "Commands executed are : ");
+		for (int i = 0; i < this.arrayLog.size(); i++) {
 			System.out.println(this.arrayLog.get(i));
 		}
+		System.out.println("\n");
 
+	}
+
+	public void yalper(int endNumber, int startNumber) {
+		arrayLog.add("yalper()" + " " + endNumber + " " + startNumber);
+		if (endNumber < this.arrayLog.size()) {
+			for (int i = endNumber; i >= startNumber; i--) {
+				String string = this.arrayLog.get(i);
+				String[] parts = string.split(" ");
+				String methodName = parts[0];
+				String attributeValue = parts[1];
+				int attribute = Integer.parseInt(attributeValue);
+
+				switch (methodName) {
+				case "moveForward()":
+					this.moveForward(attribute);
+					break;
+				case "moveBackward()":
+					this.moveBackward(attribute);
+					break;
+				case "moveLeft()":
+					this.moveLeft(attribute);
+					break;
+				case "moveRight()":
+					this.moveRight(attribute);
+					break;
+				case "setAngle()":
+					this.setAngle(attribute);
+					break;
+				case "replay()":
+					String attributeValue2 = parts[2];
+					int attribute2 = Integer.parseInt(attributeValue2);
+					this.replay(attribute, attribute2);
+					break;
+				case "goToPosition()":
+					String getPosition2 = parts[2];
+					int position2 = Integer.parseInt(getPosition2);
+					this.goToPosition(attribute, position2);
+					break;
+					
+				case "yalper()":
+					String positionValue = parts[2];
+					int attributeYalper2 = Integer.parseInt(positionValue);
+					this.replay(attribute, attributeYalper2);
+					break;
+					
+				default:
+					System.out.println("Invalid method name");
+				}
+			}
+		}
+		else
+		{
+			System.out.println("End Number is greater than the arrayLog size");
+		}
+		
 	}
 }

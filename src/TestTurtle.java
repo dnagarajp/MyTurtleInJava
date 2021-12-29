@@ -138,6 +138,37 @@ class TestTurtle {
 		assertEquals(90, turtle.angle);
 		assertEquals(13, turtle.arrayLog.size());
 	}
+	
+	
+	@Test
+	void testYalper() {
+
+		turtle.goToPosition(0, 0);
+		turtle.setAngle(90);
+		turtle.moveForward(10);
+		turtle.yalper(2,1); 
+		assertEquals(0, turtle.x);
+		assertEquals(20, turtle.y);
+		assertEquals(90, turtle.angle);
+		assertEquals(6, turtle.arrayLog.size());
+	}
+	
+	
+	@Test
+	void testYalperTwice() {
+
+		turtle.goToPosition(0, 0);
+		turtle.setAngle(90);
+		turtle.moveForward(10);
+		turtle.yalper(2, 1); 
+		turtle.yalper(3, 1); 
+		turtle.getList();
+		assertEquals(0, turtle.x);
+		assertEquals(30,turtle.y);
+		assertEquals(90,turtle.angle);
+		assertEquals(10, turtle.arrayLog.size());
+	}
+	
 
 	@Test
 	void testListisEmpty() {
@@ -145,8 +176,9 @@ class TestTurtle {
 	}
 
 	@Test
-	void testList() {
+	void testListContains() {
 		turtle.goToPosition(3, 8);
+		turtle.getList();
 		assertEquals(1, turtle.arrayLog.size());
 	}
 
