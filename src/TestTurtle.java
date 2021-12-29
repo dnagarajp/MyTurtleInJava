@@ -132,7 +132,7 @@ class TestTurtle {
 		turtle.setAngle(90);
 		turtle.moveForward(10);
 		turtle.replay(1, 2); // totally the size is 3 together commands here. 
-		turtle.replay(0, 3); // this contains 7 commands in total
+		turtle.replay(0, 3); // this contains 5 commands in total
 		assertEquals(0, turtle.x);
 		assertEquals(20, turtle.y);
 		assertEquals(90, turtle.angle);

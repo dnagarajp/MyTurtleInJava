@@ -117,7 +117,7 @@ public class Turtle {
 	public void replay(int startNumber, int endNumber) {
 
 		arrayLog.add("replay()" + " " + startNumber + " " + endNumber);
-		if (endNumber <= this.arrayLog.size()) {
+		if (endNumber < this.arrayLog.size()) {
 			for (int i = startNumber; i <= endNumber; i++) {
 				String string = this.arrayLog.get(i);
 				String[] parts = string.split(" ");
@@ -141,24 +141,24 @@ public class Turtle {
 				case "setAngle()":
 					this.setAngle(attribute);
 					break;
-
 				case "replay()":
-
 					String attributeValue2 = parts[2];
 					int attribute2 = Integer.parseInt(attributeValue2);
 					this.replay(attribute, attribute2);
 					break;
-
 				case "goToPosition()":
-
 					String getPosition2 = parts[2];
 					int position2 = Integer.parseInt(getPosition2);
 					this.goToPosition(attribute, position2);
-
+					break;
 				default:
 					System.out.println("Invalid method name");
 				}
 			}
+		}
+		else
+		{
+			System.out.println("End Number is greater than the arrayLog size");
 		}
 	}
 
