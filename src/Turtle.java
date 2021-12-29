@@ -9,13 +9,19 @@ public class Turtle {
 
 	public int x;
 	public int y;
-	public int angle;
+	public int direction;
 	public ArrayList<String> arrayLog;
 
-	public Turtle(int x, int y, int angle) {
+	public Turtle(int x, int y, int direction) {
+		if (x < 0) {
+			x = 0;
+		}
+		if (y < 0) {
+			y = 0;
+		}
 		this.x = x;
 		this.y = y;
-		this.angle = angle;
+		this.direction = direction;
 		arrayLog = new ArrayList<String>();
 
 	}
@@ -43,22 +49,22 @@ public class Turtle {
 
 	}
 
-	public void setAngle(int angleValue) {
+	public void setdirection(int directionValue) {
 
-		arrayLog.add("setAngle()" + " " + angleValue);
+		arrayLog.add("setdirection()" + " " + directionValue);
 
-		angle = angleValue;
+		direction = directionValue;
 
 	}
 
 	public void moveForward(int steps) {
 		// only expects 0,90,180 and 270
 		arrayLog.add("moveForward()" + " " + steps);
-		if (angle == 0) {
+		if (direction == 0) {
 			this.moveEast(steps);
-		} else if (angle <= 90) {
+		} else if (direction <= 90) {
 			this.moveNorth(steps);
-		} else if (angle == 180) {
+		} else if (direction == 180) {
 			this.moveWest(steps);
 		} else {
 			this.moveSouth(steps);
@@ -68,11 +74,11 @@ public class Turtle {
 	public void moveBackward(int steps) {
 		// only expects 0,90,180 and 270
 		arrayLog.add("moveBackward()" + " " + steps);
-		if (angle == 0) {
+		if (direction == 0) {
 			this.moveWest(steps);
-		} else if (angle == 90) {
+		} else if (direction == 90) {
 			this.moveSouth(steps);
-		} else if (angle == 180) {
+		} else if (direction == 180) {
 			this.moveEast(steps);
 		} else {
 			this.moveNorth(steps);
@@ -82,11 +88,11 @@ public class Turtle {
 	public void moveLeft(int steps) {
 		// only expects 0,90,180 and 270
 		arrayLog.add("moveLeft()" + " " + steps);
-		if (angle == 0) {
+		if (direction == 0) {
 			this.moveNorth(steps);
-		} else if (angle == 90) {
+		} else if (direction == 90) {
 			this.moveWest(steps);
-		} else if (angle == 180) {
+		} else if (direction == 180) {
 			this.moveSouth(steps);
 		} else {
 			this.moveEast(steps);
@@ -96,11 +102,11 @@ public class Turtle {
 	public void moveRight(int steps) {
 		// only expects 0,90,180 and 270
 		arrayLog.add("moveRight()" + " " + steps);
-		if (angle == 0) {
+		if (direction == 0) {
 			this.moveSouth(steps);
-		} else if (angle == 90) {
+		} else if (direction == 90) {
 			this.moveEast(steps);
-		} else if (angle == 180) {
+		} else if (direction == 180) {
 			this.moveNorth(steps);
 		} else {
 			this.moveWest(steps);
@@ -113,6 +119,20 @@ public class Turtle {
 		x = xValue;
 		y = yValue;
 	}
+	
+	public int getXPosition() {
+		return this.x;
+
+	}
+	
+	public int getYPosition() {
+		return this.y;
+
+	}
+	
+	public int getDirection() {
+	    return this.direction;
+	  }
 
 	public void replay(int startNumber, int endNumber) {
 
@@ -138,8 +158,8 @@ public class Turtle {
 				case "moveRight()":
 					this.moveRight(attribute);
 					break;
-				case "setAngle()":
-					this.setAngle(attribute);
+				case "setdirection()":
+					this.setdirection(attribute);
 					break;
 				case "replay()":
 					String attributeValue2 = parts[2];
@@ -155,9 +175,7 @@ public class Turtle {
 					System.out.println("Invalid method name");
 				}
 			}
-		}
-		else
-		{
+		} else {
 			System.out.println("End Number is greater than the arrayLog size");
 		}
 	}
@@ -194,8 +212,8 @@ public class Turtle {
 				case "moveRight()":
 					this.moveRight(attribute);
 					break;
-				case "setAngle()":
-					this.setAngle(attribute);
+				case "setdirection()":
+					this.setdirection(attribute);
 					break;
 				case "replay()":
 					String attributeValue2 = parts[2];
@@ -207,22 +225,20 @@ public class Turtle {
 					int position2 = Integer.parseInt(getPosition2);
 					this.goToPosition(attribute, position2);
 					break;
-					
+
 				case "yalper()":
 					String positionValue = parts[2];
 					int attributeYalper2 = Integer.parseInt(positionValue);
 					this.replay(attribute, attributeYalper2);
 					break;
-					
+
 				default:
 					System.out.println("Invalid method name");
 				}
 			}
-		}
-		else
-		{
+		} else {
 			System.out.println("End Number is greater than the arrayLog size");
 		}
-		
+
 	}
 }
