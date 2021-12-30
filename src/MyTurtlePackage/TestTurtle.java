@@ -1,3 +1,4 @@
+package MyTurtlePackage;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -9,24 +10,26 @@ class TestTurtle {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		turtle = new Turtle(-9, -5, 0);
+
+		// Default constructor
+		turtle = new Turtle();
 
 	}
 
 	/**
-	 * test initialValues of X and Y based on constructor if Negative values it
-	 * resets the X and Y points to 0. if no requirement of moving the x y , default
-	 * should be 0
+	 * Test initialValues of x,y,direction based on default constructor is called
+	 * initiated gets the x,y,direction points should be to 0,0,0 respectively.
 	 */
 	@Test
-	void testInitialValueOfXY() {
+	void testInitialValue() {
 		assertEquals(0, turtle.getXPosition());
 		assertEquals(0, turtle.getYPosition());
+		assertEquals(0, turtle.getDirection());
 	}
 
 	/**
-	 * test X and Y based on the MoveTo method With negative values as an argument,
-	 * should contain given values to x and y respectively
+	 * test X and Y based on the MoveTo method with negative values as an argument,
+	 * should contain given values to x and y respectively with -
 	 */
 	@Test
 	void testMoveToWithNegativeValues() {
@@ -36,8 +39,8 @@ class TestTurtle {
 	}
 
 	/**
-	 * test X and Y based the method using MoveTo should set the X and Y as per the
-	 * new values
+	 * test X and Y based the moveTo method with positive values as an argument.
+	 * should contain given values to x and y respectively with +
 	 */
 	@Test
 	void testMoveToWithPositiveValues() {
@@ -59,7 +62,7 @@ class TestTurtle {
 	/**
 	 * tests the direction can be set from 0-359 negative values towards anti
 	 * clockwise. direction. should show exactly what the direction [calculated with
-	 * "360 - directionValue" if its in negative Numbers
+	 * "360 - directionValue" if its in negative Numbers.s
 	 */
 	@Test
 	void testSetDirectionAntiClockwise() {
@@ -69,7 +72,7 @@ class TestTurtle {
 
 	/**
 	 * With direction is 0, should move towards angle 0 degree, where x will
-	 * increment and y is constant i.e, 0
+	 * increment and y is still default i.e, 0
 	 */
 	@Test
 	void testMove() {
@@ -79,7 +82,7 @@ class TestTurtle {
 	}
 
 	/**
-	 * test negative values so that as a value to move should traverse back on the
+	 * Test negative values so that as a value to move should traverse back on the
 	 * same line
 	 */
 	@Test
@@ -91,7 +94,7 @@ class TestTurtle {
 	}
 
 	/**
-	 * turtle is facing towards 1st quadrant perpendicular to x axis and y axis move
+	 * Turtle is facing towards 1st quadrant perpendicular to x axis and y axis move
 	 * 10 steps towards 90 degree, should show the values x=0 and y=10
 	 */
 	@Test
@@ -104,7 +107,7 @@ class TestTurtle {
 	}
 
 	/**
-	 * turtle is facing towards 1st quadrant (+ +) with angle 45 degree and move
+	 * Turtle is facing towards 1st quadrant (+ +) with angle 45 degree and move
 	 * forward and should show the x and y positions as 7, 7 .calculated based on
 	 * trigonometric formula with the help of radius.
 	 */
@@ -118,7 +121,7 @@ class TestTurtle {
 	}
 
 	/**
-	 * turtle is facing towards 2nd quadrant (- +) with angle 110 degree and move
+	 * Turtle is facing towards 2nd quadrant (- +) with angle 110 degree and move
 	 * forward and should show the x and y positions as -3, 9 .calculated based on
 	 * trigonometric formula with the help of radius.
 	 */
@@ -132,7 +135,7 @@ class TestTurtle {
 	}
 
 	/**
-	 * turtle is facing towards 3rd quadrant (- -) with angle 195 degree and move
+	 * Turtle is facing towards 3rd quadrant (- -) with angle 195 degree and move
 	 * forward and should show the x and y positions as -8, -2 .calculated based on
 	 * trigonometric formula with the help of radius.
 	 */
@@ -160,7 +163,7 @@ class TestTurtle {
 	}
 
 	/**
-	 * turtle is facing towards 1st quadrant perpendicular to x axis and y axis move
+	 * Turtle is facing towards 1st quadrant perpendicular to x axis and y axis move
 	 * 10 steps backward in the 90 degree angle, should show the values x=0 and
 	 * y=-10.
 	 */
@@ -174,7 +177,7 @@ class TestTurtle {
 	}
 
 	/**
-	 * turtle is facing towards 4th quadrant (+ -) with angle 315 degree and move
+	 * Turtle is facing towards 4th quadrant (+ -) with angle 315 degree and move
 	 * forward then backward to see the x and y values are still in 4th
 	 * quadrant.should show the x and y positions as 1, -5 .calculated based on
 	 * trigonometric formula with the help of radius.
@@ -190,7 +193,7 @@ class TestTurtle {
 	}
 
 	/**
-	 * turtle is facing towards 4th quadrant (+ -) with angle 320 degree and move
+	 * Turtle is facing towards 4th quadrant (+ -) with angle 320 degree and move
 	 * backward to see the x and y values are crossing and coming to 2nd Quadrant (-
 	 * +) from 4th quadrant.should show the x and y positions as -14, 12 .calculated
 	 * based on trigonometric formula with the help of radius.
@@ -205,7 +208,7 @@ class TestTurtle {
 	}
 
 	/**
-	 * turtle is facing towards 3rd quadrant (- -) with angle 250 degree and move
+	 * Turtle is facing towards 3rd quadrant (- -) with angle 250 degree and move
 	 * forward then backward to see the x and y values are still in 3rd
 	 * quadrant.should show the x and y positions as -2, -5 .calculated based on
 	 * trigonometric formula with the help of radius.
@@ -221,7 +224,7 @@ class TestTurtle {
 	}
 
 	/**
-	 * turtle is facing towards 2nd quadrant (- +) with angle 165 degree and move
+	 * Turtle is facing towards 2nd quadrant (- +) with angle 165 degree and move
 	 * forward then backward to see the x and y values are still in 2nd
 	 * quadrant.should show the x and y positions as -9, -3 .calculated based on
 	 * trigonometric formula with the help of radius.
@@ -237,7 +240,7 @@ class TestTurtle {
 	}
 
 	/**
-	 * turtle is facing towards 1st quadrant (+ +) with angle 83 degree and move
+	 * Turtle is facing towards 1st quadrant (+ +) with angle 83 degree and move
 	 * forward then backward to see the x and y values are still in 1st
 	 * quadrant.should show the x and y positions as 1, 15. calculated based on
 	 * trigonometric formula with the help of radius.
@@ -252,6 +255,12 @@ class TestTurtle {
 		assertEquals(15, turtle.getYPosition());
 	}
 
+	/**
+	 * Turtle is moving to 0,0 in 0 degree angle.then angle changed to 90,then move
+	 * 10 steps, replay setDirection and moveForward again by specifying the start
+	 * number and end number which will iterate. should show x,y,angle,size as
+	 * 0,20,90,6 respectively
+	 */
 	@Test
 	void testReplay() {
 
@@ -265,6 +274,13 @@ class TestTurtle {
 		assertEquals(6, turtle.arrayLog.size());
 	}
 
+	/**
+	 * Turtle is moving to 0,0 in 0 degree angle.then angle changed to 90,then move
+	 * 10 steps, replay setDirection and moveForward again by specifying the start
+	 * number and end number, again replay 0 to 3 which calls reply twice and
+	 * iterates it. should show x,y,angle,size as 0,20,90,13 respectively. ArraySize
+	 * for replay will keep changing based on startNumber and EndNumber.
+	 */
 	@Test
 	void testReplayTwice() {
 
@@ -279,6 +295,12 @@ class TestTurtle {
 		assertEquals(13, turtle.arrayLog.size());
 	}
 
+	/**
+	 * Turtle is moving to -9,3 in 0 degree angle.then angle changed to 90,then move
+	 * 10 steps, reverse moveForward with 10 more steps and setDirection to 90. by
+	 * specifying the endNumber start number which will iterate. should show
+	 * x,y,angle,size as -9,23,90,6 respectively
+	 */
 	@Test
 	void testYalperWithMoveToNegationValues() {
 
@@ -292,6 +314,12 @@ class TestTurtle {
 		assertEquals(6, turtle.arrayLog.size());
 	}
 
+	/**
+	 * Turtle is moving to 0,0 in 0 degree angle.then angle changed to 90,then move
+	 * 10 steps, reverse moveForward with 10 more steps and setDirection to 90.again
+	 * do reverse from index 3 to 0. by should show x,y,angle,size as 0,40,90,12
+	 * respectively
+	 */
 	@Test
 	void testYalperTwice() {
 
@@ -302,16 +330,22 @@ class TestTurtle {
 		turtle.yalper(3, 1);
 		turtle.getList();
 		assertEquals(0, turtle.x);
-		assertEquals(30, turtle.y);
+		assertEquals(40, turtle.y);
 		assertEquals(90, turtle.direction);
-		assertEquals(9, turtle.arrayLog.size());
+		assertEquals(12, turtle.arrayLog.size());
 	}
 
+	/**
+	 * Verifies the array is empty when there is no command executed.
+	 */
 	@Test
 	void testListisEmpty() {
 		assertEquals(0, turtle.arrayLog.size());
 	}
 
+	/**
+	 * Verifies the array contains a single value.
+	 */
 	@Test
 	void testListContains() {
 		turtle.moveTo(3, 8);
@@ -319,17 +353,8 @@ class TestTurtle {
 		assertEquals(1, turtle.arrayLog.size());
 	}
 
-//	@Test
-//	void testUndo() {
-//		turtle.moveTo(3, 8);
-//		turtle.moveTo(31, 0);
-//		turtle.undo();
-//		assertEquals(0, turtle.x);
-//		assertEquals(0,turtle.y);
-//	}
-//	
 	/**
-	 * turn right side angle 0-89 = -89, then convert it to right angle, negative
+	 * Turn right side angle 0-89 = -89, then convert it to right angle, negative
 	 * value rights operation which 360-89=271
 	 */
 	@Test
@@ -339,7 +364,7 @@ class TestTurtle {
 	}
 
 	/**
-	 * sets the direction 0 + 47 = 47 angle for first time then turn right with 89,
+	 * Sets the direction 0 + 47 = 47 angle for first time then turn right with 89,
 	 * which means 47-89 = -42 now calculate the right angle, since its mine should
 	 * show the angle to 318 degree. and make some movement and my X and Y should be
 	 * 9 -2.
@@ -356,9 +381,8 @@ class TestTurtle {
 	}
 
 	/**
-	 * turn right side angle 0+90 = 90, then convert it to left angle, positive
-	 * value left operation which is 360+90 =450. 450 % 360 = which is 90 degree
-	 * angle
+	 * Turn left side angle 0+90 = 90, then convert it to left angle, positive value
+	 * left operation which is 360+90 =450. 450 % 360 = which is 90 degree angle
 	 */
 	@Test
 	void testTurnLeft() {
@@ -367,9 +391,9 @@ class TestTurtle {
 	}
 
 	/**
-	 * turn right side angle 0+45 = 45,move some some position which is x=8 and y=4
-	 * then turn to left with angle 20 , positive value left operation which is 45+20
-	 * =65. 65 % 360  which is 65 degree angle
+	 * Turn left side angle 0+45 = 45,move some some position which is x=8 and y=4
+	 * then turn to left with angle 20 , positive value left operation which is
+	 * 45+20 =65. 65 % 360 which is 65 degree angle
 	 */
 	@Test
 	void testTurnLeftWithSetDirection() {
