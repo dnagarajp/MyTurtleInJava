@@ -198,4 +198,25 @@ public class Turtle {
 			System.out.println("End Number is greater than the arrayLog size");
 		}
 	}
+
+	/**
+     * Undo the last command.
+     */
+    public void undo()
+    {
+	return;
+    }
+    
+    
+    
+    public void turnRight(int angle) {
+    	direction -= angle;
+    	direction = (direction + 360) % 360;
+    }
+    
+    
+    public void turnLeft(int angle) {
+    	direction += angle;
+    	direction = (direction +360) % 360;
+    }
 }

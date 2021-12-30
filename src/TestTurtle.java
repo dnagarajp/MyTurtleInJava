@@ -278,37 +278,34 @@ class TestTurtle {
 		assertEquals(90, turtle.direction);
 		assertEquals(13, turtle.arrayLog.size());
 	}
-	
-	
-	@Test
-	void testYalper() {
 
-		turtle.moveTo(0, 0);
+	@Test
+	void testYalperWithMoveToNegationValues() {
+
+		turtle.moveTo(-9, 3);
 		turtle.setDirection(90);
 		turtle.moveForward(10);
-		turtle.yalper(2,1); 
-		assertEquals(0, turtle.x);
-		assertEquals(20, turtle.y);
+		turtle.yalper(2, 1);
+		assertEquals(-9, turtle.x);
+		assertEquals(23, turtle.y);
 		assertEquals(90, turtle.direction);
 		assertEquals(6, turtle.arrayLog.size());
 	}
-	
-	
+
 	@Test
 	void testYalperTwice() {
 
 		turtle.moveTo(0, 0);
 		turtle.setDirection(90);
 		turtle.moveForward(10);
-		turtle.yalper(2, 1); 
-		turtle.yalper(3, 1); 
+		turtle.yalper(2, 1);
+		turtle.yalper(3, 1);
 		turtle.getList();
 		assertEquals(0, turtle.x);
-		assertEquals(30,turtle.y);
-		assertEquals(90,turtle.direction);
+		assertEquals(30, turtle.y);
+		assertEquals(90, turtle.direction);
 		assertEquals(9, turtle.arrayLog.size());
 	}
-	
 
 	@Test
 	void testListisEmpty() {
@@ -322,5 +319,67 @@ class TestTurtle {
 		assertEquals(1, turtle.arrayLog.size());
 	}
 
+//	@Test
+//	void testUndo() {
+//		turtle.moveTo(3, 8);
+//		turtle.moveTo(31, 0);
+//		turtle.undo();
+//		assertEquals(0, turtle.x);
+//		assertEquals(0,turtle.y);
+//	}
+//	
+	/**
+	 * turn right side angle 0-89 = -89, then convert it to right angle, negative
+	 * value rights operation which 360-89=271
+	 */
+	@Test
+	void testTurnRight() {
+		turtle.turnRight(89);
+		assertEquals(271, turtle.direction);
+	}
+
+	/**
+	 * sets the direction 0 + 47 = 47 angle for first time then turn right with 89,
+	 * which means 47-89 = -42 now calculate the right angle, since its mine should
+	 * show the angle to 318 degree. and make some movement and my X and Y should be
+	 * 9 -2.
+	 */
+	@Test
+	void testTurnRightWithSetDirection() {
+		turtle.setDirection(47);
+		turtle.moveTo(8, -1);
+		turtle.turnRight(89);
+		turtle.moveForward(2);
+		assertEquals(318, turtle.direction);
+		assertEquals(9, turtle.x);
+		assertEquals(-2, turtle.y);
+	}
+
+	/**
+	 * turn right side angle 0+90 = 90, then convert it to left angle, positive
+	 * value left operation which is 360+90 =450. 450 % 360 = which is 90 degree
+	 * angle
+	 */
+	@Test
+	void testTurnLeft() {
+		turtle.turnLeft(90);
+		assertEquals(90, turtle.direction);
+	}
+
+	/**
+	 * turn right side angle 0+45 = 45,move some some position which is x=8 and y=4
+	 * then turn to left with angle 20 , positive value left operation which is 45+20
+	 * =65. 65 % 360  which is 65 degree angle
+	 */
+	@Test
+	void testTurnLeftWithSetDirection() {
+		turtle.setDirection(45);
+		turtle.moveTo(8, 4);
+		turtle.turnLeft(20);
+		turtle.moveForward(2);
+		assertEquals(65, turtle.direction);
+		assertEquals(9, turtle.x);
+		assertEquals(6, turtle.y);
+	}
 
 }
