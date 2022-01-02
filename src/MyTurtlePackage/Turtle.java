@@ -1,7 +1,8 @@
 package MyTurtlePackage;
+
 import java.util.ArrayList;
 
-	class Turtle {
+class Turtle {
 
 	public static void main(String[] args) {
 
@@ -14,14 +15,10 @@ import java.util.ArrayList;
 	protected ArrayList<String> arrayLog;
 
 	/**
-	 * Constructor with values are initialized. you can create objects with default
-	 * or parameter constructor. as you choose
+	 * Default constructor calls another parameterized constructor.
 	 */
-	protected Turtle() {
-		this.x = 0;
-		this.y = 0;
-		this.direction = 0;
-		arrayLog = new ArrayList<String>();
+	public Turtle() {
+		this(0, 0, 0);
 	}
 
 	/**
@@ -31,7 +28,7 @@ import java.util.ArrayList;
 	 * @param y         position value
 	 * @param direction or angle of the circle in degrees
 	 */
-	protected Turtle(int x, int y, int direction) {
+	public Turtle(int x, int y, int direction) {
 		this.x = x;
 		this.y = y;
 		this.direction = direction;
@@ -40,20 +37,25 @@ import java.util.ArrayList;
 	}
 
 	// Return the current x position
-	protected int getXPosition() {
+	public int getXPosition() {
 		return this.x;
 
 	}
 
 	// Return the current y position
-	protected int getYPosition() {
+	public int getYPosition() {
 		return this.y;
 
 	}
 
 	// Return the current direction or angle
-	protected int getDirection() {
+	public int getDirection() {
 		return this.direction;
+	}
+
+	// method to log all values in an array list.
+	public void Log(String methodName, int parameter1, int parameter2) {
+		arrayLog.add(methodName + " " + parameter1 + " " + parameter2);
 	}
 
 	/**
@@ -62,8 +64,9 @@ import java.util.ArrayList;
 	 * @param direction positive numbers goes with clockwise direction, Negative
 	 *                  numbers goes with backward direction
 	 */
-	protected void setDirection(int direction) {
-		arrayLog.add("setDirection()" + " " + direction);
+	public void setDirection(int direction) {
+		Log("setDirection()", direction, 0);
+
 		direction = (direction % 360);
 		if (direction < 0) {
 			direction = direction + 360;
@@ -72,8 +75,15 @@ import java.util.ArrayList;
 		this.direction = direction;
 	}
 
-	protected void moveTo(int x, int y) {
-		arrayLog.add("moveTo()" + " " + x + " " + y);
+	/**
+	 * Move to Specified location by specifying the newX and newY values.
+	 * 
+	 * @param x new value for x position
+	 * @param y new value for y position
+	 */
+	public void moveTo(int x, int y) {
+		Log("moveTo()", x, y);
+
 		this.x = x;
 		this.y = y;
 
@@ -87,8 +97,8 @@ import java.util.ArrayList;
 	 *               calculate the x and y positions by adding the old x and y
 	 *               values.
 	 */
-	protected void moveForward(int step) {
-		arrayLog.add("moveForward()" + " " + step);
+	public void moveForward(int step) {
+		Log("moveForward()", step, 0);
 		double dirRads = Math.PI * (this.direction / 180.0);
 		int xStep = x + (int) Math.round(Math.cos(dirRads) * step);
 		int yStep = y + (int) Math.round(Math.sin(dirRads) * step);
@@ -104,8 +114,8 @@ import java.util.ArrayList;
 	 *               calculate the x and y positions by subtracting the old x and
 	 *               old y values.
 	 */
-	protected void moveBackward(int step) {
-		arrayLog.add("moveBackward()" + " " + step);
+	public void moveBackward(int step) {
+		Log("moveBackward()", step, 0);
 		double dirRads = Math.PI * (this.direction / 180.0);
 		int endXStep = x - (int) Math.round(Math.cos(dirRads) * step);
 		int endYStep = y - (int) Math.round(Math.sin(dirRads) * step);
@@ -121,7 +131,8 @@ import java.util.ArrayList;
 	 *              subtracted(anti clockwise) with the specified direction value
 	 *              and set the direction in right quadrant by using the formula.
 	 */
-	protected void turnRight(int angle) {
+	public void turnRight(int angle) {
+		Log("turnRight()", angle, 0);
 		direction -= angle;
 		direction = (direction + 360) % 360;
 	}
@@ -133,7 +144,8 @@ import java.util.ArrayList;
 	 *              wise) with the specified direction value and sets the direction
 	 *              in left quadrant by using the formula.
 	 */
-	protected void turnLeft(int angle) {
+	public void turnLeft(int angle) {
+		Log("turnLeft()", angle, 0);
 		direction += angle;
 		direction = (direction + 360) % 360;
 	}
@@ -147,66 +159,75 @@ import java.util.ArrayList;
 	 *                    of command cannot be possible to execute. which is current
 	 *                    method replay()s
 	 */
-	protected void replay(int startNumber, int endNumber) {
+	public void replay(int startNumber, int endNumber) {
 
-		arrayLog.add("replay()" + " " + startNumber + " " + endNumber);
-		if (endNumber < this.arrayLog.size()) {
+		Log("replay()", startNumber, endNumber);
+		if (endNumber < this.arrayLog.size() && startNumber >= 0) {
 			for (int i = startNumber; i <= endNumber; i++) {
 				String string = this.arrayLog.get(i);
 				String[] parts = string.split(" ");
 				String methodName = parts[0];
-				String attributeValue = parts[1];
-				int attribute = Integer.parseInt(attributeValue);
+				String attributeValue1 = parts[1];
+				int attribute1 = Integer.parseInt(attributeValue1);
+				String attributeValue2 = parts[2];
+				int attribute2 = Integer.parseInt(attributeValue2);
+				searchMethodToInvoke(methodName, attribute1, attribute2);
 
-				/**
-				 * Finds the right methodName and invokes it by passing the right attribute
-				 * values
-				 */
-				switch (methodName) {
-
-				case "setDirection()":
-					this.setDirection(attribute);
-					break;
-				case "moveTo()":
-					String getPosition2 = parts[2];
-					int position2 = Integer.parseInt(getPosition2);
-					this.moveTo(attribute, position2);
-					break;
-				case "moveForward()":
-					this.moveForward(attribute);
-					break;
-				case "moveBackward()":
-					this.moveBackward(attribute);
-					break;
-				case "replay()":
-					String attributeValue2 = parts[2];
-					int attribute2 = Integer.parseInt(attributeValue2);
-					this.replay(attribute, attribute2);
-					break;
-				case "yalper()":
-					String attributeVal = parts[2];
-					int attr2 = Integer.parseInt(attributeVal);
-					this.yalper(attribute, attr2);
-					break;
-				default:
-					System.out.println("Invalid method name");
-				}
 			}
 		} else {
-			System.out.println("End Number is greater than the arrayLog size");
+			System.out.println("Ensure of the StartNumber is always > 0  and EnnNumber < current Index");
 		}
 	}
 
 	/**
-	 * Gets the entire list of commands which are executed.
+	 * CommonMethod for Searching the methodName
+	 * 
 	 */
-	protected void getList() {
-		System.out.println("Array Size is :=  " + this.arrayLog.size() + "\n" + "Commands executed are : ");
-		for (int i = 0; i < this.arrayLog.size(); i++) {
-			System.out.println(this.arrayLog.get(i));
-		}
-		System.out.println("\n");
+	public void searchMethodToInvoke(String methodName, int attribute1, int attribute2) {
 
+		int index = arrayLog.size();
+		switch (methodName) {
+
+		case "setDirection()":
+			this.setDirection(attribute1);
+			arrayLog.remove(index);
+			break;
+		case "moveTo()":
+			this.moveTo(attribute1, attribute2);
+			arrayLog.remove(index);
+			break;
+		case "moveForward()":
+			this.moveForward(attribute1);
+			arrayLog.remove(index);
+			break;
+		case "moveBackward()":
+			this.moveBackward(attribute1);
+			arrayLog.remove(index);
+			break;
+
+		case "turnRight()":
+			this.turnRight(attribute1);
+			arrayLog.remove(index);
+			break;
+
+		case "turnLeft()":
+			this.turnLeft(attribute1);
+			arrayLog.remove(index);
+			break;
+
+		case "replay()":
+			this.replay(attribute1, attribute2);
+			arrayLog.remove(index);
+			break;
+
+		case "yalper()":
+			this.yalper(attribute1, attribute2);
+			arrayLog.remove(index);
+			break;
+
+		default:
+			System.out.println("Invalid method name");
+		}
 	}
 
 	/**
@@ -222,54 +243,37 @@ import java.util.ArrayList;
 	 *                    reply method.
 	 */
 
-	protected void yalper(int endNumber, int startNumber) {
-		arrayLog.add("yalper()" + " " + endNumber + " " + startNumber);
+	public void yalper(int endNumber, int startNumber) {
+		Log("yalper()", endNumber, startNumber);
+
 		if (endNumber < this.arrayLog.size()) {
 			for (int i = endNumber; i >= startNumber; i--) {
 				String string = this.arrayLog.get(i);
 				String[] parts = string.split(" ");
 				String methodName = parts[0];
-				String attributeValue = parts[1];
-				int attribute = Integer.parseInt(attributeValue);
+				String attributeValue1 = parts[1];
+				int attribute1 = Integer.parseInt(attributeValue1);
+				String attributeValue2 = parts[2];
+				int attribute2 = Integer.parseInt(attributeValue2);
+				searchMethodToInvoke(methodName, attribute1, attribute2);
 
-				/**
-				 * Finds the right methodName and invokes it by passing the right attribute
-				 * values
-				 */
-				switch (methodName) {
-
-				case "setDirection()":
-					this.setDirection(attribute);
-					break;
-				case "moveTo()":
-					String getPosition2 = parts[2];
-					int position2 = Integer.parseInt(getPosition2);
-					this.moveTo(attribute, position2);
-					break;
-				case "moveForward()":
-					this.moveForward(attribute);
-					break;
-				case "moveBackward()":
-					this.moveBackward(attribute);
-					break;
-				case "replay()":
-					String attributeValue2 = parts[2];
-					int attribute2 = Integer.parseInt(attributeValue2);
-					this.replay(attribute, attribute2);
-					break;
-				case "yalper()":
-					String attributeVal = parts[2];
-					int attr2 = Integer.parseInt(attributeVal);
-					this.yalper(attribute, attr2);
-					break;
-				default:
-					System.out.println("Invalid method name");
-
-				}
 			}
 		} else {
 			System.out.println("End Number is greater than the arrayLog size");
+			System.out.println("Ensure of the EndNumber is always < array size  and startNumber greater or equal to 0");
 		}
+	}
+
+	/**
+	 * Gets the entire list of commands which are executed.
+	 */
+	public void getList() {
+		System.out.println("Array Size is :=  " + this.arrayLog.size() + "\n" + "Commands executed are : ");
+		for (int i = 0; i < this.arrayLog.size(); i++) {
+			System.out.println(this.arrayLog.get(i));
+		}
+		System.out.println("\n");
+
 	}
 
 }

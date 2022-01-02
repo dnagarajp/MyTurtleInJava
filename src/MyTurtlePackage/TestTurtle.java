@@ -1,4 +1,5 @@
 package MyTurtlePackage;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -271,7 +272,7 @@ class TestTurtle {
 		assertEquals(0, turtle.x);
 		assertEquals(20, turtle.y);
 		assertEquals(90, turtle.direction);
-		assertEquals(6, turtle.arrayLog.size());
+		assertEquals(4, turtle.arrayLog.size());
 	}
 
 	/**
@@ -292,7 +293,7 @@ class TestTurtle {
 		assertEquals(0, turtle.x);
 		assertEquals(20, turtle.y);
 		assertEquals(90, turtle.direction);
-		assertEquals(13, turtle.arrayLog.size());
+		assertEquals(5, turtle.arrayLog.size());
 	}
 
 	/**
@@ -311,7 +312,7 @@ class TestTurtle {
 		assertEquals(-9, turtle.x);
 		assertEquals(23, turtle.y);
 		assertEquals(90, turtle.direction);
-		assertEquals(6, turtle.arrayLog.size());
+		assertEquals(4, turtle.arrayLog.size());
 	}
 
 	/**
@@ -328,11 +329,10 @@ class TestTurtle {
 		turtle.moveForward(10);
 		turtle.yalper(2, 1);
 		turtle.yalper(3, 1);
-		turtle.getList();
 		assertEquals(0, turtle.x);
 		assertEquals(40, turtle.y);
 		assertEquals(90, turtle.direction);
-		assertEquals(12, turtle.arrayLog.size());
+		assertEquals(5, turtle.arrayLog.size());
 	}
 
 	/**
@@ -349,7 +349,6 @@ class TestTurtle {
 	@Test
 	void testListContains() {
 		turtle.moveTo(3, 8);
-		turtle.getList();
 		assertEquals(1, turtle.arrayLog.size());
 	}
 
@@ -404,6 +403,22 @@ class TestTurtle {
 		assertEquals(65, turtle.direction);
 		assertEquals(9, turtle.x);
 		assertEquals(6, turtle.y);
+	}
+
+	@Test
+	void testReplayManyTimes() {
+
+		turtle.setDirection(90);
+		turtle.moveForward(10);
+		turtle.turnRight(90);
+		turtle.replay(1, 2);
+		turtle.replay(3, 3);
+		turtle.replay(3, 4);
+		turtle.replay(4, 4);
+		turtle.replay(2, 6);
+		assertEquals(0, turtle.x);
+		assertEquals(10,turtle.y);
+		assertEquals(90,turtle.direction);
 	}
 
 }
