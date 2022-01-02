@@ -11,48 +11,75 @@ class Turtle {
 
 		Turtle t1 = new Turtle();
 		try {
-			Scanner scanner = new Scanner(new File("/Users/deepa/eclipse-workspace/TurtleSimple/src/File1.txt"));
-			while (scanner.hasNextLine()) {
-				String string = scanner.nextLine();
-				String[] parts = string.split(" ");
-				String methodName = parts[0];
-				int value1 = Integer.parseInt(parts[1]);
+			/**
+			 * Reads commands from text file and executes them prints the current value of X
+			 * , Y and angle
+			 */
+			File file = new File("/Users/deepa/eclipse-workspace/TurtleSimple/src/File1.txt");
 
-				if (methodName.compareTo("setDirection") == 0) {
-					t1.setDirection(Integer.valueOf(value1));
-				} else if (methodName.compareTo("moveForward") == 0) {
-					t1.moveForward(Integer.valueOf(value1));
-				} else if (methodName.compareTo("moveBackward") == 0) {
-					t1.moveBackward(Integer.valueOf(value1));
-				} else if (methodName.compareTo("turnLeft") == 0) {
-					t1.turnLeft(Integer.valueOf(value1));
-				} else if (methodName.compareTo("turnRight") == 0) {
-					t1.turnRight(Integer.valueOf(value1));
-				} else if (methodName.compareTo("replay") == 0) {
-					int value2 = Integer.parseInt(parts[2]);
-					t1.replay(Integer.valueOf(value1), Integer.valueOf(value2));
-
-				} else if (methodName.compareTo("yalper") == 0) {
-					int value2 = Integer.parseInt(parts[2]);
-					t1.yalper(Integer.valueOf(value1), Integer.valueOf(value2));
-				} else {
-					System.out.println("Invalid Operation");
-				}
-
+			if ((file.length() == 0)) {
+				System.out.println("File is empty");
 			}
-			scanner.close();
-			t1.getList();
-			System.out.println("x = " + t1.x + " " + "y = " + t1.y + " " + "angle = " + t1.direction);
+
+			else {
+				Scanner scanner = new Scanner((file));
+				while (scanner.hasNextLine()) {
+					String string = scanner.nextLine();
+					String[] parts = string.split(" ");
+					String methodName = parts[0];
+					int value1 = Integer.parseInt(parts[1]);
+					if (methodName.compareTo("setDirection") == 0) {
+
+						t1.setDirection(Integer.valueOf(value1));
+					} else if (methodName.compareTo("moveForward") == 0) {
+						t1.moveForward(Integer.valueOf(value1));
+					} else if (methodName.compareTo("moveBackward") == 0) {
+						t1.moveBackward(Integer.valueOf(value1));
+					} else if (methodName.compareTo("turnLeft") == 0) {
+						t1.turnLeft(Integer.valueOf(value1));
+					} else if (methodName.compareTo("turnRight") == 0) {
+						t1.turnRight(Integer.valueOf(value1));
+					} else if (methodName.compareTo("moveTo") == 0) {
+						int value2 = Integer.parseInt(parts[2]);
+						t1.moveTo(Integer.valueOf(value1), Integer.valueOf(value2));
+					} else if (methodName.compareTo("replay") == 0) {
+						int value2 = Integer.parseInt(parts[2]);
+						t1.replay(Integer.valueOf(value1), Integer.valueOf(value2));
+					} else if (methodName.compareTo("yalper") == 0) {
+						int value2 = Integer.parseInt(parts[2]);	
+						t1.yalper(Integer.valueOf(value1), Integer.valueOf(value2));
+					} else if (methodName.compareTo("getList") == 0) {
+						t1.getList();
+					}
+					else {
+						System.out.println("Invalid method name");
+					}
+				}
+				scanner.close();
+				t1.getList();
+				System.out.println("x = " + t1.x + " " + "y = " + t1.y + " " + "angle = " + t1.direction + "\n");
+			}
+
 		} catch (FileNotFoundException e) {
+
+			System.out.println("File not found exception occurred look at the trace here");
 			e.printStackTrace();
-			System.out.println("File not  found");
+		} catch (NumberFormatException e) {
+
+			System.out.println("Number Format Exception exception occurred look at the trace here");
+			e.printStackTrace();
+		} catch (ArrayIndexOutOfBoundsException e) {
+
+			System.out.println("Array out of bound exception occurred look at the trace here");
+			e.printStackTrace();
 		} catch (Exception e) {
+
+			System.out.println("There is an expection occurred look at the trace here");
 			e.printStackTrace();
-			System.out.println("There is an expection");
 		}
-		
+
 		finally {
-			
+			System.out.println("Your program is completed");
 		}
 	}
 
@@ -115,13 +142,16 @@ class Turtle {
 	 */
 	public void setDirection(int direction) {
 		Log("setDirection()", direction, 0);
+		try {
+			direction = (direction % 360);
+			if (direction < 0) {
+				direction = direction + 360;
+			}
 
-		direction = (direction % 360);
-		if (direction < 0) {
-			direction = direction + 360;
+			this.direction = direction;
+		} catch (Exception e) {
+			System.out.println("Ensure you enter a integer values");
 		}
-
-		this.direction = direction;
 	}
 
 	/**
@@ -132,9 +162,13 @@ class Turtle {
 	 */
 	protected void moveTo(int x, int y) {
 		Log("moveTo()", x, y);
-
-		this.x = x;
-		this.y = y;
+		try {
+			this.x = x;
+			this.y = y;
+		} catch (NumberFormatException e) {
+			System.out.println("NumberFormatException exception occurred : try to enter integer values");
+			e.printStackTrace();
+		}
 
 	}
 
@@ -211,20 +245,27 @@ class Turtle {
 	protected void replay(int startNumber, int endNumber) {
 
 		Log("replay()", startNumber, endNumber);
-		if (endNumber < this.arrayLog.size() && startNumber >= 0) {
-			for (int i = startNumber; i <= endNumber; i++) {
-				String string = this.arrayLog.get(i);
-				String[] parts = string.split(" ");
-				String methodName = parts[0];
-				String attributeValue1 = parts[1];
-				int attribute1 = Integer.parseInt(attributeValue1);
-				String attributeValue2 = parts[2];
-				int attribute2 = Integer.parseInt(attributeValue2);
-				searchMethodToInvoke(methodName, attribute1, attribute2);
+		try {
+			if (startNumber >= 0 && endNumber < this.arrayLog.size() && this.arrayLog.size()!=1  ) {
+				for (int i = startNumber; i <= endNumber; i++) {
+					String string = this.arrayLog.get(i);
+					String[] parts = string.split(" ");
+					String methodName = parts[0];
+					String attributeValue1 = parts[1];
+					int attribute1 = Integer.parseInt(attributeValue1);
+					String attributeValue2 = parts[2];
+					int attribute2 = Integer.parseInt(attributeValue2);
+					searchMethodToInvoke(methodName, attribute1, attribute2);
 
+				}
+			} else 
+			{				
+				throw new MyCustomException();
+				
 			}
-		} else {
-			System.out.println("Ensure of the StartNumber is always > 0  and EnnNumber < current Index");
+		} catch (MyCustomException e) {
+			System.out.println("Exception caught when any of the following condition occurs startNumber < endNumber && endNumber > size && arraysize is 0");
+			e.printStackTrace();
 		}
 	}
 
@@ -291,11 +332,10 @@ class Turtle {
 	 *                    and gets the array values in order to perform reverse of
 	 *                    reply method.
 	 */
-
 	protected void yalper(int endNumber, int startNumber) {
 		Log("yalper()", endNumber, startNumber);
-
-		if (endNumber < this.arrayLog.size()) {
+		try {
+		if (endNumber < this.arrayLog.size() && startNumber >= 0 && this.arrayLog.size()!=1 ) {
 			for (int i = endNumber; i >= startNumber; i--) {
 				String string = this.arrayLog.get(i);
 				String[] parts = string.split(" ");
@@ -307,9 +347,14 @@ class Turtle {
 				searchMethodToInvoke(methodName, attribute1, attribute2);
 
 			}
-		} else {
-			System.out.println("End Number is greater than the arrayLog size");
-			System.out.println("Ensure of the EndNumber is always < array size  and startNumber greater or equal to 0");
+		} else 
+		{
+			throw new MyCustomException();
+		}
+		}catch(MyCustomException e) {
+			System.out.println("Exception caught when endNumber > arraySize and startNumber > 0 ");
+			e.printStackTrace();	
+		
 		}
 	}
 
@@ -317,11 +362,11 @@ class Turtle {
 	 * Gets the entire list of commands which are executed.
 	 */
 	protected void getList() {
-		System.out.println("Array Size is :=  " + this.arrayLog.size() + "\n" + "Commands executed are : ");
+		// System.out.println("Array Size is := " + this.arrayLog.size() + "\n" +
+		// "Commands executed are : ");
 		for (int i = 0; i < this.arrayLog.size(); i++) {
 			System.out.println(this.arrayLog.get(i));
 		}
-		System.out.println("\n");
 
 	}
 

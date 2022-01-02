@@ -417,8 +417,9 @@ class TestTurtle {
 		turtle.replay(4, 4);
 		turtle.replay(2, 6);
 		assertEquals(0, turtle.x);
-		assertEquals(10,turtle.y);
-		assertEquals(90,turtle.direction);
+		assertEquals(10, turtle.y);
+		assertEquals(90, turtle.direction);
 	}
+
 
 }
