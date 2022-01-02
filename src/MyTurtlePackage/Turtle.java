@@ -1,11 +1,59 @@
 package MyTurtlePackage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 class Turtle {
 
 	public static void main(String[] args) {
 
+		Turtle t1 = new Turtle();
+		try {
+			Scanner scanner = new Scanner(new File("/Users/deepa/eclipse-workspace/TurtleSimple/src/File1.txt"));
+			while (scanner.hasNextLine()) {
+				String string = scanner.nextLine();
+				String[] parts = string.split(" ");
+				String methodName = parts[0];
+				int value1 = Integer.parseInt(parts[1]);
+
+				if (methodName.compareTo("setDirection") == 0) {
+					t1.setDirection(Integer.valueOf(value1));
+				} else if (methodName.compareTo("moveForward") == 0) {
+					t1.moveForward(Integer.valueOf(value1));
+				} else if (methodName.compareTo("moveBackward") == 0) {
+					t1.moveBackward(Integer.valueOf(value1));
+				} else if (methodName.compareTo("turnLeft") == 0) {
+					t1.turnLeft(Integer.valueOf(value1));
+				} else if (methodName.compareTo("turnRight") == 0) {
+					t1.turnRight(Integer.valueOf(value1));
+				} else if (methodName.compareTo("replay") == 0) {
+					int value2 = Integer.parseInt(parts[2]);
+					t1.replay(Integer.valueOf(value1), Integer.valueOf(value2));
+
+				} else if (methodName.compareTo("yalper") == 0) {
+					int value2 = Integer.parseInt(parts[2]);
+					t1.yalper(Integer.valueOf(value1), Integer.valueOf(value2));
+				} else {
+					System.out.println("Invalid Operation");
+				}
+
+			}
+			scanner.close();
+			t1.getList();
+			System.out.println("x = " + t1.x + " " + "y = " + t1.y + " " + "angle = " + t1.direction);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("File not  found");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("There is an expection");
+		}
+		
+		finally {
+			
+		}
 	}
 
 	// Declare variables
@@ -56,6 +104,7 @@ class Turtle {
 	// method to log all values in an array list.
 	protected void Log(String methodName, int parameter1, int parameter2) {
 		arrayLog.add(methodName + " " + parameter1 + " " + parameter2);
+		// System.out.println(methodName + " " + parameter1 + " " + parameter2);
 	}
 
 	/**
@@ -64,7 +113,7 @@ class Turtle {
 	 * @param direction positive numbers goes with clockwise direction, Negative
 	 *                  numbers goes with backward direction
 	 */
-	protected void setDirection(int direction) {
+	public void setDirection(int direction) {
 		Log("setDirection()", direction, 0);
 
 		direction = (direction % 360);

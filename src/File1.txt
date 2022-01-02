@@ -1,0 +1,6 @@
+setDirection 90
+moveForward 10
+turnRight 90
+replay 1 2
+replay 3 3
+replay 3 4
