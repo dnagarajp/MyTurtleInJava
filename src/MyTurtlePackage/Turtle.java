@@ -37,24 +37,24 @@ class Turtle {
 	}
 
 	// Return the current x position
-	public int getXPosition() {
+	protected int getXPosition() {
 		return this.x;
 
 	}
 
 	// Return the current y position
-	public int getYPosition() {
+	protected int getYPosition() {
 		return this.y;
 
 	}
 
 	// Return the current direction or angle
-	public int getDirection() {
+	protected int getDirection() {
 		return this.direction;
 	}
 
 	// method to log all values in an array list.
-	public void Log(String methodName, int parameter1, int parameter2) {
+	protected void Log(String methodName, int parameter1, int parameter2) {
 		arrayLog.add(methodName + " " + parameter1 + " " + parameter2);
 	}
 
@@ -64,7 +64,7 @@ class Turtle {
 	 * @param direction positive numbers goes with clockwise direction, Negative
 	 *                  numbers goes with backward direction
 	 */
-	public void setDirection(int direction) {
+	protected void setDirection(int direction) {
 		Log("setDirection()", direction, 0);
 
 		direction = (direction % 360);
@@ -81,7 +81,7 @@ class Turtle {
 	 * @param x new value for x position
 	 * @param y new value for y position
 	 */
-	public void moveTo(int x, int y) {
+	protected void moveTo(int x, int y) {
 		Log("moveTo()", x, y);
 
 		this.x = x;
@@ -97,7 +97,7 @@ class Turtle {
 	 *               calculate the x and y positions by adding the old x and y
 	 *               values.
 	 */
-	public void moveForward(int step) {
+	protected void moveForward(int step) {
 		Log("moveForward()", step, 0);
 		double dirRads = Math.PI * (this.direction / 180.0);
 		int xStep = x + (int) Math.round(Math.cos(dirRads) * step);
@@ -114,7 +114,7 @@ class Turtle {
 	 *               calculate the x and y positions by subtracting the old x and
 	 *               old y values.
 	 */
-	public void moveBackward(int step) {
+	protected void moveBackward(int step) {
 		Log("moveBackward()", step, 0);
 		double dirRads = Math.PI * (this.direction / 180.0);
 		int endXStep = x - (int) Math.round(Math.cos(dirRads) * step);
@@ -131,7 +131,7 @@ class Turtle {
 	 *              subtracted(anti clockwise) with the specified direction value
 	 *              and set the direction in right quadrant by using the formula.
 	 */
-	public void turnRight(int angle) {
+	protected void turnRight(int angle) {
 		Log("turnRight()", angle, 0);
 		direction -= angle;
 		direction = (direction + 360) % 360;
@@ -144,7 +144,7 @@ class Turtle {
 	 *              wise) with the specified direction value and sets the direction
 	 *              in left quadrant by using the formula.
 	 */
-	public void turnLeft(int angle) {
+	protected void turnLeft(int angle) {
 		Log("turnLeft()", angle, 0);
 		direction += angle;
 		direction = (direction + 360) % 360;
@@ -159,7 +159,7 @@ class Turtle {
 	 *                    of command cannot be possible to execute. which is current
 	 *                    method replay()s
 	 */
-	public void replay(int startNumber, int endNumber) {
+	protected void replay(int startNumber, int endNumber) {
 
 		Log("replay()", startNumber, endNumber);
 		if (endNumber < this.arrayLog.size() && startNumber >= 0) {
@@ -183,7 +183,7 @@ class Turtle {
 	 * CommonMethod for Searching the methodName
 	 * 
 	 */
-	public void searchMethodToInvoke(String methodName, int attribute1, int attribute2) {
+	protected void searchMethodToInvoke(String methodName, int attribute1, int attribute2) {
 
 		int index = arrayLog.size();
 		switch (methodName) {
@@ -243,7 +243,7 @@ class Turtle {
 	 *                    reply method.
 	 */
 
-	public void yalper(int endNumber, int startNumber) {
+	protected void yalper(int endNumber, int startNumber) {
 		Log("yalper()", endNumber, startNumber);
 
 		if (endNumber < this.arrayLog.size()) {
@@ -267,7 +267,7 @@ class Turtle {
 	/**
 	 * Gets the entire list of commands which are executed.
 	 */
-	public void getList() {
+	protected void getList() {
 		System.out.println("Array Size is :=  " + this.arrayLog.size() + "\n" + "Commands executed are : ");
 		for (int i = 0; i < this.arrayLog.size(); i++) {
 			System.out.println(this.arrayLog.get(i));
