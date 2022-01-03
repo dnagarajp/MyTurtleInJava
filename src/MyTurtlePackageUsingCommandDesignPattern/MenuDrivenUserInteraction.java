@@ -1,4 +1,4 @@
-package MyTurtlePackage;
+package MyTurtlePackageUsingCommandDesignPattern;
 
 import java.io.BufferedReader;
 import java.io.IOException;

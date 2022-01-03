@@ -1,4 +1,4 @@
-package MyTurtlePackage;
+package MyTurtlePackageUsingCommandDesignPattern;
 
 public class TurnRightCommand implements Command {
 

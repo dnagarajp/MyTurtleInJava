@@ -1,4 +1,4 @@
-package MyTurtlePackage;
+package MyTurtlePackageUsingCommandDesignPattern;
 
 public class SetDirectionCommand implements Command {
 	private Turtle turtle;
