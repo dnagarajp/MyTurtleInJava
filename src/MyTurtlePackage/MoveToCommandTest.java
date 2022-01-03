@@ -4,23 +4,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class MoveBackwardCommandTest {
+class MoveToCommandTest {
 
 	@Test
 	void testExecute() {
 		Turtle t1 = new Turtle();
-		Command cm = new MoveBackwardCommand(t1,9);
+		Command cm = new MoveToCommand(t1,9,3);
 		t1.doCommand(cm);
-		assertEquals(-9, t1.getXPosition());
-		assertEquals(0, t1.getYPosition());
+		assertEquals(9, t1.getXPosition());
+		assertEquals(3, t1.getYPosition());
 	}
 	
 	@Test
 	void testToString() {
 		 Turtle t1 = new Turtle();
-		 Command cm = new MoveBackwardCommand(t1,3);
-		 assertEquals(cm.toString(), "moveBackward 3");
+		 Command cm = new MoveToCommand(t1,9,3);
+		 assertEquals(cm.toString(), "moveTo 9 3");
 		
 	}
+
 
 }

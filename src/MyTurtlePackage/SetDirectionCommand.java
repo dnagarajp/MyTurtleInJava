@@ -9,6 +9,9 @@ public class SetDirectionCommand implements Command {
 		this.angle = angle;
 	}
 
+	/**
+	 * Sets the direction as specified by angle
+	 */
 	@Override
 	public void execute() {
 		this.angle = (this.angle % 360);

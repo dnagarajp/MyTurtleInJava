@@ -15,10 +15,18 @@ public class YalplerCommand implements Command {
 
 	}
 
+	/**
+	 * Performs a iteration loop from endNnumber to startNumber. in a reverse
+	 * commands way. ending command value, to be remember in java index start from 0
+	 * in array.starting command checks and ensures the last element of command
+	 * cannot be possible to execute. which is current method yalper(). traverse
+	 * from endNumber to greater or equal to startNumber and gets the array values
+	 * in order to perform reverse of reply method.
+	 */
 	@Override
 	public void execute() {
 
-		if (endNumber >= startNumber && endNumber < turtle.getCommands().size() - 1 && startNumber >= 0
+		if (endNumber >= startNumber && endNumber < turtle.getCommands().size() && startNumber >= 0
 				&& turtle.getCommands().size() != 1) {
 
 			for (int i = endNumber; i >= startNumber; i--) {

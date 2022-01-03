@@ -11,7 +11,10 @@ public class MoveToCommand implements Command {
 		this.yNew = y;
 
 	}
-
+	
+	/**
+	 * Move to Specified location by specifying the newX and newY values.
+	 */
 	@Override
 	public void execute() {
 		
