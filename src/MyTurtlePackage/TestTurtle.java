@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 class TestTurtle {
 
 	Turtle turtle;
+	
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -264,7 +265,7 @@ class TestTurtle {
 	 */
 	@Test
 	void testReplay() {
-
+		
 		turtle.moveTo(0, 0);
 		turtle.setDirection(90);
 		turtle.moveForward(10);
@@ -349,7 +350,7 @@ class TestTurtle {
 	@Test
 	void testListContains() {
 		turtle.moveTo(3, 8);
-		assertEquals(1, turtle.arrayLog.size());
+		assertEquals(1, turtle.commands.size());
 	}
 
 	/**
@@ -445,4 +446,34 @@ class TestTurtle {
 		assertEquals(0, turtle.direction);
 	}
 
+	@Test
+	void testmoveee() {
+		turtle.moveTo(1, 3);
+		turtle.moveTo(1, 3);
+		assertEquals(1, turtle.x);
+		assertEquals(3, turtle.y);
+		assertEquals(0, turtle.direction);
+	}
+
+//	@Test
+//	void testForwardAndUndo() {
+//    	Command c= new MoveForwardCommand(turtle, 3);
+//		turtle.doCommand(c);
+//		turtle.doCommandUndo(c);
+//		assertEquals(0, turtle.x);
+//		assertEquals(0, turtle.y);
+//		assertEquals(0, turtle.direction);
+//	}
+//
+//	@Test
+//	void testBackwardAndUndo() {
+//    	Command c= new MoveBackwardCommand(turtle, 3);
+//		turtle.doCommand(c);
+//		turtle.doCommandUndo(c);
+//		assertEquals(0, turtle.x);
+//		assertEquals(0, turtle.y);
+//		assertEquals(0, turtle.direction);
+//	}
+
+	
 }
