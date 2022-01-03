@@ -148,7 +148,7 @@ class Turtle {
 			}
 
 			this.direction = direction;
-		} catch (Exception e) {
+		} catch (NumberFormatException e) {
 			System.out.println("Ensure you enter a integer values");
 		}
 	}

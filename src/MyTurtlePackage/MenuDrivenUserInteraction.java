@@ -1,6 +1,11 @@
 package MyTurtlePackage;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -12,112 +17,53 @@ import java.util.Scanner;
  */
 public class MenuDrivenUserInteraction {
 
-	public static void main(String[] args) {
-
+	public static void main(String args[]) throws IOException {
 		Turtle t1 = new Turtle();
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("Enter Numbers of command you like to execute here: ");
+			int n;
+			n = Integer.parseInt(br.readLine());
+			System.out.print("Here are the Command List which are available:" + "\n"+ "\n" + "setDirection <value> \n"+ "moveForward <value> \n"
+					+ "moveBackward <value> \n" + "turnLeft <value> \n" + "turnRight <value> \n" + "moveTo <value1> <value2>\n"
+					+ "replay <startvalue1> <startvalue2>\n" + "yalper <startvalue1> <startvalue2> \n" + "getList \n");
+			for (int i = 1; i <= n; i++) {
 
-		int choice;
-		try (Scanner scanner = new Scanner(System.in)) {
+				System.out.print("\n" + "Write a command you wish to execute " + "\n");
+				String string = br.readLine();
 
-			System.out.println("Hello!!! Welcome to User interface to play with Turtle commands" + "\n");
-			// Creating infinite while loop
-			while (true) {
-				// Creating menu
-				System.out.println("Press 1 : setDirection");
-				System.out.println("Press 2 : moveForward");
-				System.out.println("Press 3 : moveBackward");
-				System.out.println("Press 4 : turnLeft");
-				System.out.println("Press 5 : turnRight");
-				System.out.println("Press 6 : moveTo");
-				System.out.println("Press 7 : replay");
-				System.out.println("Press 8 : yalper");
-				System.out.println("Press 9 : getList");
-				System.out.println("Press 10 : Exit\n \n ");
-				// Asking user to make choice
-				System.out.println("Make your choice");
-				choice = scanner.nextInt();
-
-				// Creating switch case branch
-				switch (choice) {
-
-				// First case for finding the addition
-				case 1:
-
-					System.out.println("Enter a value for the direction to move your turtle");
-					t1.setDirection(scanner.nextInt());
-					break;
-
-				case 2:
-
-					System.out.println("Enter the step of move forward");
-					t1.moveForward(scanner.nextInt());
-					break;
-
-				case 3:
-
-					System.out.println("Enter the step of move backward");
-					t1.moveBackward(scanner.nextInt());
-					break;
-
-				case 4:
-
-					System.out.println("Enter the angle to turn Left");
-					t1.turnLeft(scanner.nextInt());
-					break;
-
-				case 5:
-
-					System.out.println("Enter the angle to turn Right");
-					t1.turnRight(scanner.nextInt());
-					break;
-
-				case 6:
-
-					System.out.println("Enter the step of moveTo");
-					t1.moveTo(scanner.nextInt(), scanner.nextInt());
-					break;
-
-				case 7:
-
-					System.out.println("Enter the step of replay");
-					t1.replay(scanner.nextInt(), scanner.nextInt());
-					break;
-
-				case 8:
-
-					System.out.println("Enter the step of yalper");
-					t1.yalper(scanner.nextInt(), scanner.nextInt());
-					break;
-
-				case 9:
-					System.out.println("\n\n");
+				String[] parts = string.split(" ");
+				String methodName = parts[0];
+				int value1 = Integer.parseInt(parts[1]);
+				if (methodName.compareTo("setDirection") == 0) {
+					t1.setDirection(Integer.valueOf(value1));
+				} else if (methodName.compareTo("moveForward") == 0) {
+					t1.moveForward(Integer.valueOf(value1));
+				} else if (methodName.compareTo("moveBackward") == 0) {
+					t1.moveBackward(Integer.valueOf(value1));
+				} else if (methodName.compareTo("turnLeft") == 0) {
+					t1.turnLeft(Integer.valueOf(value1));
+				} else if (methodName.compareTo("turnRight") == 0) {
+					t1.turnRight(Integer.valueOf(value1));
+				} else if (methodName.compareTo("moveTo") == 0) {
+					int value2 = Integer.parseInt(parts[2]);
+					t1.moveTo(Integer.valueOf(value1), Integer.valueOf(value2));
+				} else if (methodName.compareTo("replay") == 0) {
+					int value2 = Integer.parseInt(parts[2]);
+					t1.replay(Integer.valueOf(value1), Integer.valueOf(value2));
+				} else if (methodName.compareTo("yalper") == 0) {
+					int value2 = Integer.parseInt(parts[2]);
+					t1.yalper(Integer.valueOf(value1), Integer.valueOf(value2));
+				} else if (methodName.compareTo("getList") == 0) {
 					t1.getList();
-					break;
-
-				// case to quit the program
-				case 10:
-					System.out.println("Thank you for using the program! you're now exited.  ");
-					System.exit(0);
-
-					// default case to display the message invalid choice made by the user
-
-				default:
-					System.out.println("Invalid choice!!! Please make a valid choice. \\n\\n");
+				} else {
+					System.out.println("Invalid method name");
 				}
-				//t1.getList();
 				
-				System.out.println("x = " + t1.x + " " + "y = " + t1.y + " " + "angle = " + t1.direction + "\n\n\n");
-
+				
+				System.out.println("x = " + t1.x + " " + "y = " + t1.y + " " + "angle = " + t1.direction + "\n");
 			}
-		} catch (NumberFormatException e) {
-
-			System.out.println("Number Format Exception exception occurred look at the trace here");
-			e.printStackTrace();
-		} catch (ArrayIndexOutOfBoundsException e) {
-
-			System.out.println("Array out of bound exception occurred look at the trace here");
-			e.printStackTrace();
-		} catch (Exception e) {
+		}  catch (Exception e) {
 
 			System.out.println("There is an expection occurred look at the trace here");
 			e.printStackTrace();
