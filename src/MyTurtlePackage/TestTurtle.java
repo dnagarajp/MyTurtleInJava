@@ -421,5 +421,28 @@ class TestTurtle {
 		assertEquals(90, turtle.direction);
 	}
 
+	@Test
+	void testRTimes() {
+
+		turtle.moveForward(10);
+		turtle.moveForward(10);
+		turtle.moveForward(10);
+		turtle.replay(0, 2);
+		assertEquals(60, turtle.x);
+		assertEquals(0, turtle.y);
+		assertEquals(0, turtle.direction);
+	}
+
+	@Test
+	void testRYTimes() {
+		turtle.moveForward(10);
+		turtle.moveForward(10);
+		turtle.moveForward(10);
+		turtle.replay(0, 2);
+		turtle.yalper(3, 0);
+		assertEquals(120, turtle.x);
+		assertEquals(0, turtle.y);
+		assertEquals(0, turtle.direction);
+	}
 
 }

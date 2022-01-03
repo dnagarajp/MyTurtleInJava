@@ -46,12 +46,11 @@ class Turtle {
 						int value2 = Integer.parseInt(parts[2]);
 						t1.replay(Integer.valueOf(value1), Integer.valueOf(value2));
 					} else if (methodName.compareTo("yalper") == 0) {
-						int value2 = Integer.parseInt(parts[2]);	
+						int value2 = Integer.parseInt(parts[2]);
 						t1.yalper(Integer.valueOf(value1), Integer.valueOf(value2));
 					} else if (methodName.compareTo("getList") == 0) {
 						t1.getList();
-					}
-					else {
+					} else {
 						System.out.println("Invalid method name");
 					}
 				}
@@ -182,11 +181,16 @@ class Turtle {
 	 */
 	protected void moveForward(int step) {
 		Log("moveForward()", step, 0);
-		double dirRads = Math.PI * (this.direction / 180.0);
-		int xStep = x + (int) Math.round(Math.cos(dirRads) * step);
-		int yStep = y + (int) Math.round(Math.sin(dirRads) * step);
-		this.x = xStep;
-		this.y = yStep;
+		try {
+			double dirRads = Math.PI * (this.direction / 180.0);
+			int xStep = x + (int) Math.round(Math.cos(dirRads) * step);
+			int yStep = y + (int) Math.round(Math.sin(dirRads) * step);
+			this.x = xStep;
+			this.y = yStep;
+		} catch (NumberFormatException e) {
+			System.out.println("NumberFormatException exception occurred : try to enter integer values");
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -199,11 +203,16 @@ class Turtle {
 	 */
 	protected void moveBackward(int step) {
 		Log("moveBackward()", step, 0);
-		double dirRads = Math.PI * (this.direction / 180.0);
-		int endXStep = x - (int) Math.round(Math.cos(dirRads) * step);
-		int endYStep = y - (int) Math.round(Math.sin(dirRads) * step);
-		this.x = endXStep;
-		this.y = endYStep;
+		try {
+			double dirRads = Math.PI * (this.direction / 180.0);
+			int endXStep = x - (int) Math.round(Math.cos(dirRads) * step);
+			int endYStep = y - (int) Math.round(Math.sin(dirRads) * step);
+			this.x = endXStep;
+			this.y = endYStep;
+		} catch (NumberFormatException e) {
+			System.out.println("NumberFormatException exception occurred : try to enter integer values");
+			e.printStackTrace();
+		}
 
 	}
 
@@ -216,8 +225,13 @@ class Turtle {
 	 */
 	protected void turnRight(int angle) {
 		Log("turnRight()", angle, 0);
-		direction -= angle;
-		direction = (direction + 360) % 360;
+		try {
+			direction -= angle;
+			direction = (direction + 360) % 360;
+		} catch (NumberFormatException e) {
+			System.out.println("NumberFormatException exception occurred : try to enter integer values");
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -228,9 +242,15 @@ class Turtle {
 	 *              in left quadrant by using the formula.
 	 */
 	protected void turnLeft(int angle) {
+
 		Log("turnLeft()", angle, 0);
-		direction += angle;
-		direction = (direction + 360) % 360;
+		try {
+			direction += angle;
+			direction = (direction + 360) % 360;
+		} catch (NumberFormatException e) {
+			System.out.println("NumberFormatException exception occurred : try to enter integer values");
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -246,7 +266,8 @@ class Turtle {
 
 		Log("replay()", startNumber, endNumber);
 		try {
-			if (startNumber >= 0 && endNumber < this.arrayLog.size() && this.arrayLog.size()!=1  ) {
+			if (startNumber <= endNumber && startNumber >= 0 && startNumber <= this.arrayLog.size()
+					&& endNumber < this.arrayLog.size() - 1 && this.arrayLog.size() != 1) {
 				for (int i = startNumber; i <= endNumber; i++) {
 					String string = this.arrayLog.get(i);
 					String[] parts = string.split(" ");
@@ -258,13 +279,14 @@ class Turtle {
 					searchMethodToInvoke(methodName, attribute1, attribute2);
 
 				}
-			} else 
-			{				
+			} else {
 				throw new MyCustomException();
-				
+
 			}
 		} catch (MyCustomException e) {
-			System.out.println("Exception caught when any of the following condition occurs startNumber < endNumber && endNumber > size && arraysize is 0");
+			System.out.println(
+					" Exception occurred when these conditions weren't met startNumber<=endNumber && startNumber >= 0 && startNumber <= this.arrayLog.size() && endNumber < this.arrayLog.size()-1 && this.arrayLog.size()!=1");
+
 			e.printStackTrace();
 		}
 	}
@@ -274,49 +296,53 @@ class Turtle {
 	 * 
 	 */
 	protected void searchMethodToInvoke(String methodName, int attribute1, int attribute2) {
+		try {
+			int index = arrayLog.size();
+			switch (methodName) {
 
-		int index = arrayLog.size();
-		switch (methodName) {
+			case "setDirection()":
+				this.setDirection(attribute1);
+				arrayLog.remove(index);
+				break;
+			case "moveTo()":
+				this.moveTo(attribute1, attribute2);
+				arrayLog.remove(index);
+				break;
+			case "moveForward()":
+				this.moveForward(attribute1);
+				arrayLog.remove(index);
+				break;
+			case "moveBackward()":
+				this.moveBackward(attribute1);
+				arrayLog.remove(index);
+				break;
 
-		case "setDirection()":
-			this.setDirection(attribute1);
-			arrayLog.remove(index);
-			break;
-		case "moveTo()":
-			this.moveTo(attribute1, attribute2);
-			arrayLog.remove(index);
-			break;
-		case "moveForward()":
-			this.moveForward(attribute1);
-			arrayLog.remove(index);
-			break;
-		case "moveBackward()":
-			this.moveBackward(attribute1);
-			arrayLog.remove(index);
-			break;
+			case "turnRight()":
+				this.turnRight(attribute1);
+				arrayLog.remove(index);
+				break;
 
-		case "turnRight()":
-			this.turnRight(attribute1);
-			arrayLog.remove(index);
-			break;
+			case "turnLeft()":
+				this.turnLeft(attribute1);
+				arrayLog.remove(index);
+				break;
 
-		case "turnLeft()":
-			this.turnLeft(attribute1);
-			arrayLog.remove(index);
-			break;
+			case "replay()":
+				this.replay(attribute1, attribute2);
+				arrayLog.remove(index);
+				break;
 
-		case "replay()":
-			this.replay(attribute1, attribute2);
-			arrayLog.remove(index);
-			break;
+			case "yalper()":
+				this.yalper(attribute1, attribute2);
+				arrayLog.remove(index);
+				break;
 
-		case "yalper()":
-			this.yalper(attribute1, attribute2);
-			arrayLog.remove(index);
-			break;
-
-		default:
-			System.out.println("Invalid method name");
+			default:
+				System.out.println("Invalid method name");
+			}
+		} catch (Exception e) {
+			System.out.println("Method not found");
+			e.printStackTrace();
 		}
 	}
 
@@ -335,26 +361,27 @@ class Turtle {
 	protected void yalper(int endNumber, int startNumber) {
 		Log("yalper()", endNumber, startNumber);
 		try {
-		if (endNumber < this.arrayLog.size() && startNumber >= 0 && this.arrayLog.size()!=1 ) {
-			for (int i = endNumber; i >= startNumber; i--) {
-				String string = this.arrayLog.get(i);
-				String[] parts = string.split(" ");
-				String methodName = parts[0];
-				String attributeValue1 = parts[1];
-				int attribute1 = Integer.parseInt(attributeValue1);
-				String attributeValue2 = parts[2];
-				int attribute2 = Integer.parseInt(attributeValue2);
-				searchMethodToInvoke(methodName, attribute1, attribute2);
 
+			if (endNumber >= startNumber && endNumber < this.arrayLog.size() - 1 && startNumber >= 0
+					&& this.arrayLog.size() != 1) {
+				for (int i = endNumber; i >= startNumber; i--) {
+					String string = this.arrayLog.get(i);
+					String[] parts = string.split(" ");
+					String methodName = parts[0];
+					String attributeValue1 = parts[1];
+					int attribute1 = Integer.parseInt(attributeValue1);
+					String attributeValue2 = parts[2];
+					int attribute2 = Integer.parseInt(attributeValue2);
+					searchMethodToInvoke(methodName, attribute1, attribute2);
+
+				}
+			} else {
+				throw new MyCustomException();
 			}
-		} else 
-		{
-			throw new MyCustomException();
-		}
-		}catch(MyCustomException e) {
+		} catch (MyCustomException e) {
 			System.out.println("Exception caught when endNumber > arraySize and startNumber > 0 ");
-			e.printStackTrace();	
-		
+			e.printStackTrace();
+
 		}
 	}
 
@@ -364,8 +391,14 @@ class Turtle {
 	protected void getList() {
 		// System.out.println("Array Size is := " + this.arrayLog.size() + "\n" +
 		// "Commands executed are : ");
-		for (int i = 0; i < this.arrayLog.size(); i++) {
-			System.out.println(this.arrayLog.get(i));
+		try {
+
+			for (int i = 0; i < this.arrayLog.size(); i++) {
+				System.out.println(this.arrayLog.get(i));
+			}
+		} catch (ArrayIndexOutOfBoundsException e) {
+			e.printStackTrace();
+			System.out.println("ArrayIndexOutOfBoundsException trying to access non index element");
 		}
 
 	}

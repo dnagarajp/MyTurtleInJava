@@ -1,5 +1,6 @@
 package MyTurtlePackage;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -87,9 +88,9 @@ public class MenuDrivenUserInteraction {
 					System.out.println("Enter the step of yalper");
 					t1.yalper(scanner.nextInt(), scanner.nextInt());
 					break;
-					
+
 				case 9:
-					
+					System.out.println("\n\n");
 					t1.getList();
 					break;
 
@@ -103,15 +104,27 @@ public class MenuDrivenUserInteraction {
 				default:
 					System.out.println("Invalid choice!!! Please make a valid choice. \\n\\n");
 				}
-				t1.getList();
+				//t1.getList();
+				
 				System.out.println("x = " + t1.x + " " + "y = " + t1.y + " " + "angle = " + t1.direction + "\n\n\n");
 
 			}
-		} catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println(" Array size exception is captured");
-		} catch (NullPointerException e) {
-			System.out.println(" we have a null value in variable");
+		} catch (NumberFormatException e) {
 
+			System.out.println("Number Format Exception exception occurred look at the trace here");
+			e.printStackTrace();
+		} catch (ArrayIndexOutOfBoundsException e) {
+
+			System.out.println("Array out of bound exception occurred look at the trace here");
+			e.printStackTrace();
+		} catch (Exception e) {
+
+			System.out.println("There is an expection occurred look at the trace here");
+			e.printStackTrace();
+		}
+
+		finally {
+			System.out.println("Your program is completed");
 		}
 	}
 }
