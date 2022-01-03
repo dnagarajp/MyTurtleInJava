@@ -17,5 +17,11 @@ public class MoveBackwardCommand implements Command {
 		turtle.x = xStep;
 		turtle.y = yStep;
 	}
-
+	
+	@Override
+	public String toString() {
+		
+		return "moveBackward " + steps ;
+		 
+	}
 }

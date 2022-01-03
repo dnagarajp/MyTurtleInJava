@@ -15,10 +15,15 @@ public class MoveToCommand implements Command {
 	@Override
 	public void execute() {
 		
-		int xOld = turtle.x;
-		int yOld = turtle.y;
 		turtle.x = xNew;
 		turtle.y = yNew;
+		 
+	}
+	
+	@Override
+	public String toString() {
+		
+		return "moveTo " + xNew + " " + yNew;
 		 
 	}
 

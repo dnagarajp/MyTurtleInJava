@@ -181,11 +181,13 @@ class Turtle {
 		// System.out.println("Array Size is := " + this.arrayLog.size() + "\n" +
 		// "Commands executed are : ");
 
-		for (int i = 0; i < this.commands.size(); i++) {
+		for (int i = 0; i < this.getCommands().size(); i++) {
 			// String s1 = commands.getClass().getName();
-			System.out.println(this.commands.get(i).getClass().getName());
+			System.out.println(this.getCommands().get(i).toString());
 		}
 	}
+	
+	
 
 	public void doCommand(Command name) {
 		name.execute();
@@ -193,6 +195,7 @@ class Turtle {
 	}
 
 	public void doReplayCommand(Command name) {
+
 		name.execute();
 	}
 

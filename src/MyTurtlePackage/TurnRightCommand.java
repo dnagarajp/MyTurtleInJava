@@ -18,10 +18,9 @@ public class TurnRightCommand implements Command {
 	}
 	
 	@Override
-	public void undo() {
-		Command command=new TurnLeftCommand(turtle, angle);
-		command.execute();
-
+	public String toString() {
+		
+		return "turnRight " + angle ;
+		 
 	}
-
 }

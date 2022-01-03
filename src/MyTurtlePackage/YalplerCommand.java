@@ -30,8 +30,10 @@ public class YalplerCommand implements Command {
 	}
 
 	@Override
-	public void undo() {
-		// TODO Auto-generated method stub
+	public String toString() {
+
+		return "yalper " + endNumber + " " + startNumber;
 
 	}
+
 }

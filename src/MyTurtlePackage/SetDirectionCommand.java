@@ -19,5 +19,12 @@ public class SetDirectionCommand implements Command {
 		turtle.direction = this.angle;
 
 	}
+	
+	@Override
+	public String toString() {
+		
+		return "setDirection " + angle ;
+		 
+	}
 
 }

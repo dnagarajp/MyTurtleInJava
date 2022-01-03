@@ -250,7 +250,7 @@ class TestTurtle {
 	@Test
 	void testMoveBackward1stQuadrant() {
 		turtle.setDirection(83);
-		turtle.moveForward(20);
+	//	turtle.moveForward(20);
 		turtle.moveBackward(5);
 		assertEquals(83, turtle.getDirection());
 		assertEquals(1, turtle.getXPosition());
@@ -266,14 +266,15 @@ class TestTurtle {
 	@Test
 	void testReplay() {
 		
-		turtle.moveTo(0, 0);
-		turtle.setDirection(90);
-		turtle.moveForward(10);
-		turtle.replay(1, 2);
+		turtle.doCommand(new MoveToCommand(turtle, 0, 0));
+		turtle.doCommand(new SetDirectionCommand(turtle, 90));
+		turtle.doCommand(new MoveForwardCommand(turtle, 10));
+		turtle.doCommand(new ReplayCommand(turtle, 1,2));
+	
 		assertEquals(0, turtle.x);
 		assertEquals(20, turtle.y);
 		assertEquals(90, turtle.direction);
-		assertEquals(4, turtle.arrayLog.size());
+		assertEquals(4, turtle.getCommands().size());
 	}
 
 	/**
@@ -341,7 +342,7 @@ class TestTurtle {
 	 */
 	@Test
 	void testListisEmpty() {
-		assertEquals(0, turtle.arrayLog.size());
+		assertEquals(0, turtle.commands.size());
 	}
 
 	/**

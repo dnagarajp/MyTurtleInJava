@@ -34,7 +34,7 @@ public class MenuDrivenUserInteraction {
 			
 		}
 		br.close();
-		//t1.getList();
+		t1.getList();
 		System.out.println("x = " + t1.x + " " + "y = " + t1.y + " " + "angle = " + t1.direction + "\n");
 	}
 }
