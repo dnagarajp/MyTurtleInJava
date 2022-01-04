@@ -1,4 +1,4 @@
-moveTo 0 0
-setDirection 90
-moveForward 10
-replay 1 2
+turnLeft 90
+turnLeft 90
+replay 0 1
+replay 1 1

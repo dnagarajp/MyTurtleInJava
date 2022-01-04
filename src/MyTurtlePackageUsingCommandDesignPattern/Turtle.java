@@ -11,14 +11,28 @@ class Turtle {
 	protected int x;
 	protected int y;
 	protected int direction;
-	ArrayList<Command> commands;
-	protected ArrayList<String> arrayLog;
+	protected ArrayList<Command> commands;
 
 	/**
 	 * Default constructor calls another parameterized constructor.
 	 */
 	public Turtle() {
 		this(0, 0, 0);
+	}
+
+	/**
+	 * Object Constructor initialization based on Parameters
+	 * 
+	 * @param x         position value
+	 * @param y         position value
+	 * @param direction or angle of the circle in degrees
+	 */
+	public Turtle(int x, int y, int direction) {
+		this.x = x;
+		this.y = y;
+		this.direction = direction;
+		commands = new ArrayList<Command>();
+
 	}
 
 	public static void main(String[] args) throws FileNotFoundException {
@@ -47,21 +61,6 @@ class Turtle {
 			t1.getList();
 			System.out.println("x = " + t1.x + " " + "y = " + t1.y + " " + "angle = " + t1.direction + "\n");
 		}
-
-	}
-
-	/**
-	 * Object Constructor initialization based on Parameters
-	 * 
-	 * @param x         position value
-	 * @param y         position value
-	 * @param direction or angle of the circle in degrees
-	 */
-	public Turtle(int x, int y, int direction) {
-		this.x = x;
-		this.y = y;
-		this.direction = direction;
-		commands = new ArrayList<Command>();
 
 	}
 
